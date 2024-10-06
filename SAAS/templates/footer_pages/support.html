@@ -1,0 +1,117 @@
+{% load static %}
+{% include 'landing/header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/saas/footer_pages.css' %}" />
+
+<!-- For heading  -->
+<div id="heading">
+    
+    <h1 class="">What do you need help with?</h1>
+</div>
+
+<div class="main____div">
+    <!-- selection section -->
+
+
+<div class="selection-area container">
+    <div class="inner-select-area mt-3">
+        <h1 class="text-center p-2">how you want to get help ?</h1>
+    </div>
+</div>
+
+
+
+<!-- choose the subject section -->
+
+<form action="" method="POST" enctype="multipart/form-data">
+    <div class="selection-area container">
+        
+        
+        <div class="inner-select-area mt-5">    
+            <div class="text-area">
+                <label>Subject: </label>
+                <input type="text" name="subject" placeholder="Enter your subject...." class="form-control">
+            </div>
+
+            <div class="text-area mt-4">
+                <label>Enter Email: </label><br>
+                <input id="enter-mail" type="email" name="email" placeholder="Enter your email...." class="form-control"></br>
+            </div>
+            <div class="form-floating mt-3">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">Write Your Problem....</label>
+              </div>
+            
+            <div class="text-area mt-3">
+                <label for="file-up" id class="up-file w-100" style="cursor: pointer;">Upload Files</label>
+                <input onchange="ForFileName()" id="file-up" type="file" style="visibility: hidden;" name="attachment" placeholder="Only PDF, DOCX">
+                
+                <p id="file-name-showing"></p>
+                
+            </div>
+            </br>
+            
+            
+            
+            <div class="text-area">
+                
+                <label for="img-upload" class="up-file w-100 for-upload-img" style="cursor: pointer;">Upload Images</label>
+                <input onchange="getImagePreview(event)" id="img-upload" type="file" style="visibility: hidden;" name="image_attachment">
+                
+                <div id="preview">
+                </div>
+                
+                
+            </div><br>
+            
+            
+            
+
+            <select class="select" name="subject" id="">
+               
+                        <option value="1">one</option>
+                   
+                    <option value="No Category Found">No Category Found</option>>
+               
+            </select>
+
+
+            <div class="button d-flex justify-content-center mt-4">
+                <button class="send-msg">Send Message</button>
+            </div>
+            
+        </div>       
+
+
+    </div>
+</form>
+
+</div>
+
+
+
+               
+         <!--for loading animation-->
+
+    <div class="main-loader-start">
+     <div class="main-loader">
+         <div class="sk-circle">
+          <div class="sk-circle1 sk-child"></div>
+          <div class="sk-circle2 sk-child"></div>
+          <div class="sk-circle3 sk-child"></div>
+          <div class="sk-circle4 sk-child"></div>
+          <div class="sk-circle5 sk-child"></div>
+          <div class="sk-circle6 sk-child"></div>
+          <div class="sk-circle7 sk-child"></div>
+          <div class="sk-circle8 sk-child"></div>
+          <div class="sk-circle9 sk-child"></div>
+          <div class="sk-circle10 sk-child"></div>
+          <div class="sk-circle11 sk-child"></div>
+          <div class="sk-circle12 sk-child"></div>
+        </div>
+     </div>
+     </div>
+
+     <script src="{% static 'js/saas/support.js' %}">
+
+    </script>

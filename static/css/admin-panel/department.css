@@ -1,0 +1,240 @@
+/* new dept */
+.new____dept {
+ background: var(--background-color); !important;
+}
+
+/* permission page, permission button style */
+.permisson____btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 14px;
+}
+
+.per_____btn {
+ background: var(--background-color);
+  color: var(--white);
+  border-radius: 5px;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.per_____btn:hover {
+  color: var(--white);
+}
+
+.permission_____id {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.edit___permission__btn{
+  border: none;
+  padding: 8px 25px;
+  border-radius: 6px;
+  font-weight: 600;
+  background: var(--background-color);
+  color: var(--white);
+  letter-spacing: 1px;    
+}
+
+
+/* create roles */
+.create____roles___list > div{
+  padding: 4px;
+}
+
+
+
+
+/* table */
+.main____dept____table {
+  margin-top: 70px;
+  padding: 20px;
+}
+
+td a {
+  text-decoration: none;
+}
+
+.cross___icon {
+  cursor: pointer;
+}
+
+.done____btn {
+  background: var(--background-color);
+  border: none;
+  outline: none;
+  padding: 8px 20px;
+  color: var(--white);
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.edit_______div {
+  padding: 20px;
+}
+
+/* image preview */
+#preview {
+  margin-top: 10px;
+}
+
+/* product */
+.stock_____product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* new item part */
+
+.tab______nav {
+  justify-content: center !important;
+}
+
+.two____product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.two____select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* .sale____select{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+/* hide input number type */
+/* Chrome, Safari, Edge, Opera */
+.two____select input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.two____select input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.upload_____img input {
+  visibility: hidden;
+}
+
+.upload_____img label {
+  cursor: pointer;
+  background: var(--background-color);
+  color: var(--white);
+  padding: 8px 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  background: var(--background-color); !important;
+}
+
+.tab______view {
+  margin-top: 20px;
+}
+
+.sub___tab {
+  color: var(--black);
+}
+
+.sub___tab:hover {
+  color: var(--black);
+}
+
+/*.nav-pills .nav-link.active,*/
+/*.nav-pills .show>.nav-link {*/
+/*  background-color: transparent !important;*/
+/*}*/
+
+.inner____select {
+  width: 45% !important;
+}
+
+.image_____div img {
+  width: 120px;
+  object-fit: cover;
+}
+
+#for-upload-name {
+  display: none;
+  font-size: 15px;
+  padding: 8px;
+  color: #777;
+  margin-top: 15px;
+  border-radius: 6px;
+}
+
+/* vendors */
+.all______vendor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.vendor___select {
+  width: 35%;
+}
+
+.new____vendor {
+ background: var(--background-color); !important;
+  color: var(--white);
+}
+
+.new____vendor:hover {
+  color: var(--white);
+}
+
+/* customer part */
+.general_____part,
+.all______advance,
+.contact___part {
+  padding: 20px;
+}
+
+/* product stock */
+.stock____quantity {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 850px) {
+  .tab______view {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 624px) {
+  .main____search________content {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 447px) {
+  .two____select {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 476px) {
+  .vendor___select {
+    width: 100%;
+  }
+}

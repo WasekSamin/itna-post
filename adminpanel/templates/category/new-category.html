@@ -1,0 +1,57 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+<!-- main edit content start -->
+<div class="edit_______div container">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <p class="fw-bold">Category Name:</p>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="inventory"
+        aria-label="Example text with button addon"
+        aria-describedby="button-addon1"
+        name="category_name"
+      />
+    </div>
+    {% comment %} <p class="mt-3 fw-bold">Department Description:</p>
+    <div class="form-floating">
+      <textarea
+        class="form-control"
+        placeholder="Leave a comment here"
+        id="floatingTextarea2"
+        style="height: 100px"
+      ></textarea>
+      <label for="floatingTextarea2">Input Description</label>
+    </div> {% endcomment %}
+    <div class="mt-4">
+      <label>Select Your Shop: </label>
+      <select class="form-select mt-2" aria-label="Default select example" name="shop">
+        <option selected>Select Shop</option>
+        {% for s in shops %}
+        <option value="{{ s.shop_name }}">{{ s.shop_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-check mt-3">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id="flexCheckChecked"
+        checked
+      />
+      <label class="form-check-label" for="flexCheckChecked">is ACTIVE </label>
+    </div>
+    <div class="mt-3">
+        <button class="done____btn" type="submit">Done</button>
+    <a href="{% url "category" shop_id.id %}" class="done____btn text-white">Cancel</a>
+    </div>
+  </form>
+</div>
+<!-- main edit content end -->

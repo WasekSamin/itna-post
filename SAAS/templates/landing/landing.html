@@ -1,0 +1,882 @@
+{% load static %} {% include 'landing/header.html' %}
+
+<!-- slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+/>
+
+<!-- buy domain hosting container start -->
+<div class="buy______________domain___________hosting">
+  <p class="fw-bold text-center fs-3">
+    Buy Your Plan As You Need
+  </p>
+  <!-- hosting card start -->
+  {% if packages %}
+  <div class="main_________hosting___card">
+    {% for package in packages %}
+        <a href="{% url 'package-details' package.id %}" class="domain_____________card text-dark">
+        <p>
+            <span
+            class="iconify card_________icon"
+            data-icon="mdi:web"
+            style="color: #19361a"
+            ></span>
+        </p>
+        <p class="text-uppercase package_________name">{{ package.package_name }}</p>
+        <p class="card_____price">Price start at $ {{ package.package_price }}/month</p>
+        <small class="mb-2 text-muted">
+            {{ package.package_description }}
+        </small>
+        <button class="card_______btn">GET</button>
+    </a>
+    {% endfor %}
+  <!-- hosting card end -->
+</div>
+{% endif %}
+<!-- buy domain hosting container end -->
+
+<!-- Before Buying Hosting start -->
+<div class="before___________buying_______hosting">
+  <p class="fw-bold fs-3 text-center item____________name">
+    Things to Consider Before Buying Our Service
+  </p>
+  <p class="text-center text-muted buying______card______text">
+    If you look at a hosting company in Bangladesh, you will see that most of
+    the companies have different types of hosting and they are of different
+    quality. So you must consider the following before buying hosting from a web
+    hosting company in Bangladesh.
+  </p>
+  <!-- before buying card start -->
+  <div class="main____________buying________card">
+    <!-- card start -->
+    <div class="buying___________card">
+      <div class="card_________icon">
+        <p>
+          <span
+            class="iconify"
+            data-icon="akar-icons:money"
+            style="color: #19361a"
+          ></span>
+        </p>
+      </div>
+      <div class="right_________content_________card">
+        <p class="fw-bold fs-5">Budget</p>
+        <p class="text-muted">
+          All you have to do before setting up a website is to set a budget,
+          which includes a budget for domain hosting. Do a good budget on the
+          back of the hosting when doing this budget.
+        </p>
+      </div>
+    </div>
+    <!-- card end -->
+
+    <!-- extra card start -->
+    <div class="buying___________card">
+      <div class="card_________icon">
+        <p>
+          <span
+            class="iconify"
+            data-icon="akar-icons:money"
+            style="color: #19361a"
+          ></span>
+        </p>
+      </div>
+      <div class="right_________content_________card">
+        <p class="fw-bold fs-5">Budget</p>
+        <p class="text-muted">
+          All you have to do before setting up a website is to set a budget,
+          which includes a budget for domain hosting. Do a good budget on the
+          back of the hosting when doing this budget.
+        </p>
+      </div>
+    </div>
+
+    <div class="buying___________card">
+      <div class="card_________icon">
+        <p>
+          <span
+            class="iconify"
+            data-icon="akar-icons:money"
+            style="color: #19361a"
+          ></span>
+        </p>
+      </div>
+      <div class="right_________content_________card">
+        <p class="fw-bold fs-5">Budget</p>
+        <p class="text-muted">
+          All you have to do before setting up a website is to set a budget,
+          which includes a budget for domain hosting. Do a good budget on the
+          back of the hosting when doing this budget.
+        </p>
+      </div>
+    </div>
+
+    <div class="buying___________card">
+      <div class="card_________icon">
+        <p>
+          <span
+            class="iconify"
+            data-icon="akar-icons:money"
+            style="color: #19361a"
+          ></span>
+        </p>
+      </div>
+      <div class="right_________content_________card">
+        <p class="fw-bold fs-5">Budget</p>
+        <p class="text-muted">
+          All you have to do before setting up a website is to set a budget,
+          which includes a budget for domain hosting. Do a good budget on the
+          back of the hosting when doing this budget.
+        </p>
+      </div>
+    </div>
+    <!-- extra card end -->
+  </div>
+  <!-- before buying card end -->
+</div>
+<!-- Before Buying Hosting end -->
+
+<!-- 30 Days Money Back Guarantee start -->
+<div class="main______money_______back____guarantee">
+  <div class="money________back______icon">
+    <p>
+      <span
+        class="iconify money________icon"
+        data-icon="clarity:dollar-solid"
+        style="color: #fff"
+      ></span>
+    </p>
+  </div>
+  <div class="right________content_____all">
+    <p class="fs-3 text-white">30 Days Money Back Guarantee</p>
+    <p class="text-white mone____card____des">
+      Go for one week risk free trail. Your purchase is secured our 30 days
+      moneyback guarantee. <a href="#">*Conditions apply</a>
+    </p>
+  </div>
+</div>
+<!-- 30 Days Money Back Guarantee end -->
+
+<!-- Benefits of Using Bangladeshi Web Hosting start -->
+<!-- Before Buying Hosting start -->
+<div class="before___________buying_______hosting">
+  <p class="fw-bold fs-3 text-center item____________name">
+    Benefits of Using Our Service
+  </p>
+  <p class="text-center text-muted buying______card______text">
+    Users may think that if Bangladeshi hosting companies cheat, the answer is,
+    there are many Trusted domain hosting companies in our country at present,
+    who have been coming up with good services for a long time. These companies
+    handle many of the country’s largest banks and businesses. There are also
+    many customers from outside the country at present. So finding the best
+    domain hosting company in Bangladesh for your website is a very difficult
+    thing. Then before buying domain hosting from any hosting company in our
+    country, you must know what you have, and after buying you will know what
+    you are getting, especially make sure that you have cPanel access.You have
+    many advantages to using bd web hosting in terms of benefits for which many
+    users are currently using web hosting bd or thinking about using. Some of
+    the benefits are highlighted:
+  </p>
+  <!-- before buying card start -->
+  <div class="main____________buying________card">
+    <!-- card start -->
+    <div class="buying___________card">
+      <div class="card_________icon">
+        <p>
+          <span
+            class="iconify"
+            data-icon="ri:customer-service-2-line"
+            style="color: #19361a"
+          ></span>
+        </p>
+      </div>
+      <div class="right_________content_________card">
+        <p class="fw-bold fs-5">Use of Mother Tongue</p>
+        <p class="text-muted">
+          Many people have trouble speaking English. In that case, it would be
+          wise to take hosting service from a hosting company in Bangladesh.
+          Because, by calling directly, they can be informed about the problem
+          in Bengali. Moreover, any problem of domain hosting you can easily
+          express your words in your mother tongue.Due to which you will get the
+          solution of your problem very easily in a short time.
+        </p>
+      </div>
+    </div>
+    <!-- card end -->
+
+    <!-- extra card start -->
+    <div class="buying___________card">
+      <div class="card_________icon">
+        <p>
+          <span
+            class="iconify"
+            data-icon="ri:customer-service-2-line"
+            style="color: #19361a"
+          ></span>
+        </p>
+      </div>
+      <div class="right_________content_________card">
+        <p class="fw-bold fs-5">Use of Mother Tongue</p>
+        <p class="text-muted">
+          Many people have trouble speaking English. In that case, it would be
+          wise to take hosting service from a hosting company in Bangladesh.
+          Because, by calling directly, they can be informed about the problem
+          in Bengali. Moreover, any problem of domain hosting you can easily
+          express your words in your mother tongue.Due to which you will get the
+          solution of your problem very easily in a short time.
+        </p>
+      </div>
+    </div>
+
+    <div class="buying___________card">
+      <div class="card_________icon">
+        <p>
+          <span
+            class="iconify"
+            data-icon="akar-icons:money"
+            style="color: #19361a"
+          ></span>
+        </p>
+      </div>
+      <div class="right_________content_________card">
+        <p class="fw-bold fs-5">Use of Mother Tongue</p>
+        <p class="text-muted">
+          Many people have trouble speaking English. In that case, it would be
+          wise to take hosting service from a hosting company in Bangladesh.
+          Because, by calling directly, they can be informed about the problem
+          in Bengali. Moreover, any problem of domain hosting you can easily
+          express your words in your mother tongue.Due to which you will get the
+          solution of your problem very easily in a short time.
+        </p>
+      </div>
+    </div>
+
+    <div class="buying___________card">
+      <div class="card_________icon">
+        <p>
+          <span
+            class="iconify"
+            data-icon="ri:customer-service-2-line"
+            style="color: #19361a"
+          ></span>
+        </p>
+      </div>
+      <div class="right_________content_________card">
+        <p class="fw-bold fs-5">Use of Mother Tongue</p>
+        <p class="text-muted">
+          Many people have trouble speaking English. In that case, it would be
+          wise to take hosting service from a hosting company in Bangladesh.
+          Because, by calling directly, they can be informed about the problem
+          in Bengali. Moreover, any problem of domain hosting you can easily
+          express your words in your mother tongue.Due to which you will get the
+          solution of your problem very easily in a short time.
+        </p>
+      </div>
+    </div>
+    <!-- extra card end -->
+  </div>
+  <!-- before buying card end -->
+</div>
+<!-- Before Buying Hosting end -->
+<!-- Benefits of Using Bangladeshi Web Hosting end -->
+
+<!-- web hosting container start -->
+{% comment %} <div class="main_____web__________hosting">
+  <!-- left content start -->
+  <div class="web________hosting____left___part">
+    <p class="fs-3 fw-bold">Web Hosting BD</p>
+    <p class="text-muted">
+      Domain hosting is very important in creating and running websites. The
+      first and foremost essential element in creating a professional quality
+      website is domain name and web hosting. To get these you need to take the
+      services of a good quality universally recognized and popular web hosting
+      company. There are many providers in the country and abroad for buying
+      hosting but the question is where should you get it from. The advice is to
+      try in the country without hiring services from foreign companies because
+      there are many good quality companies. So getting the best web hosting in
+      Bangladesh is much easier now. If you take BD hosting from a local
+      company, you can get various benefits including customer service and
+      payment options.
+    </p>
+  </div>
+  <!-- left content end -->
+  <!-- right content start -->
+  <div class="img____left___div">
+    <img src="{% static 'images/man.jpeg' %}" />
+  </div>
+  <!-- right content end -->
+</div> {% endcomment %}
+<!-- web hosting container end -->
+
+<!-- web hosting container start -->
+{% comment %} <div class="main_____web__________hosting">
+  <!-- left content start -->
+  <div class="img____left___div">
+    <img src="{% static 'images/man.jpeg' %}" />
+  </div>
+  <!-- left content end -->
+  <!-- right content start -->
+  <div class="web________hosting____left___part">
+    <p class="fs-3 fw-bold">Why BD Hosting Better than Foreign?</p>
+    <p class="text-muted">
+      In almost every case, beginners in the web development world are confused
+      about choosing a hosting company. Most do not understand where and how to
+      buy domain hosting. A hosting company in Bangladesh can be better from
+      different perspectives than foreign companies. When you are looking for
+      the best domain hosting company in Bangladesh, you will check its
+      features, price, and reliability. Reviewing the current Bangladesh hosting
+      services, you know that they are in no way inferior to foreign companies.
+      People usually search for “Best Web Hosting Company” in various search
+      engines including Google. The list of names of different international
+      hosting companies comes first in the search list. From which you need to
+      buy hosting from Dual Currency Visa, MasterCard, or various online money
+      transfer services such as PayPal, Payoneer, Skrill, etc. High rate fee
+      connected services of the company. However, using web hosting BD you are
+      completely free from these problems. Websites can be published by creating
+      a web hosting account by paying for the payment or hosting through mobile
+      payment processing services like bKash or Rocket at a much easier and
+      comparatively low cost.
+    </p>
+  </div>
+  <!-- right content end -->
+</div> {% endcomment %}
+<!-- web hosting container end -->
+
+<!-- customer feedback container start -->
+<div class="main_________customer________feedback mt-3">
+  <p class="fs-3 fw-bold text-center">Customer Feedback</p>
+  <p class="text-muted text-center">
+    It’s not our goal to get nice testimonials and reviews, We want to satisfy
+    you Let’s have an amazing ride with us.
+  </p>
+
+  <!-- card start -->
+  <div class="main_________card_________div owl-carousel owl-theme">
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <!-- card end -->
+
+    <!-- extra card start -->
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+    <div class="customer_______card">
+      <img src="{% static 'images/vageta.jpeg' %}" class="rounded-circle" />
+      <div class="customer_______details">
+        <p class="fs-6 fw-bold text-center customer_______name">
+          EKHANE NAAM HOBE
+        </p>
+        <p class="text-center">Happy User</p>
+        <p class="text-center">
+          <span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="ant-design:star-filled"
+            style="color: #f0d50e"
+          ></span
+          ><span
+            class="iconify"
+            data-icon="bi:star-half"
+            style="color: #f0d50e"
+          ></span>
+        </p>
+        <p class="text-muted text-center full______details">
+          It was great introducing with ”Nut Hosting”. Customer Support is
+          superb. Fully satisfied with live chat and over the phone. Best wishes
+          to ”it nut hosting family”
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- extra card end -->
+</div>
+<!-- customer feedback container end -->
+{% include 'landing/footer.html' %}
+<script>
+  // slider
+
+  $(".owl-carousel").owlCarousel({
+    loop: true,
+    autoplay: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      600: {
+        items: 2,
+      },
+      1000: {
+        items: 3,
+      },
+    },
+  });
+</script>
+
+

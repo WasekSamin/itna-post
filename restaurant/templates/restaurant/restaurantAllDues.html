@@ -1,0 +1,103 @@
+{% extends "restaurant/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/restaurant/restaurantAllPayments.css' %}" />
+
+{% include "restaurant/sidebar.html" %}
+
+<script src="{% static 'js/restaurant/restaurantAllDues.js' %}" defer></script>
+
+<section class="restaurant__allPaymentContent">
+    {% comment %} Restaurant payment header section starts {% endcomment %}
+    <div id="restaurant__allPaymentHeader" class="d-flex justify-content-between align-items-center px-3">
+        <section>
+            <a href="{% url 'open-restaurant' shopId.id %}" class="text-white">
+                <span class="iconify" data-icon="ic:baseline-arrow-back-ios-new"></span> Back
+            </a>
+        </section>
+        <section class="restaurant__allOrdersHeaderTitle">
+            <h5 class="text-white fw-bold">All Dues</h5>
+        </section>
+
+        <section>
+            <div class="d-flex align-items-center restaurant__allPaymentsSearchContent bg-white px-2 py-1 pe-1">
+                <span class="iconify fs-4 me-2 text-muted" data-icon="ant-design:search-outlined"></span>
+                <input onkeyup="matchName(this)" class="w-100" type="search" placeholder="Search..." />
+            </div>
+        </section>
+    </div>
+    {% comment %} Restaurant payment header section ends {% endcomment %}
+
+    <div class="restaurant__allPaymentTableSection">
+        <section class="table-responsive">
+            <table class="table">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" colspan="2">Order ID</th>
+                    <th scope="col">Submission Date</th>
+                    <th scope="col">Due Total</th>
+                    <th scope="col">Order Note</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody class="restaurant__allPaymentDueTable">
+                    {% for o in dues %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'restaurant-due-details' shopId.id o.id %}" class="w-100 d-flex text-dark restaurant__orderDate">
+                                {{ o.created_at }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'restaurant-due-details' shopId.id o.id %}" class="w-100 d-flex text-dark">
+                                {% if o.due_clear == True %}
+                                <section>
+                                    <span class="iconify fs-5" data-icon="teenyicons:tick-circle-solid" style="color: #4ec274;"></span>
+                                </section>
+                                {% else %}
+                                <section>
+                                    <span class="iconify fs-4 text-danger" data-icon="entypo:circle-with-cross"></span>
+                                </section>
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td colspan="2">
+                            <a href="{% url 'restaurant-due-details' shopId.id o.id %}" class="w-100 d-flex text-dark restaurant__paymentOrderId">
+                                #{{ o.id }}
+                            </a>
+                        </td>
+                        
+                        <td>
+                            <a href="{% url 'restaurant-due-details' shopId.id o.id %}" class="w-100 d-flex text-dark restaurant__paymentCustName">
+                                {{o.submission_date}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'restaurant-due-details' shopId.id o.id %}" class="w-100 d-flex text-dark restaurant__grandTotal">
+                                {{ shopId.currency.currency_icon }}{{o.due_total}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'restaurant-due-details' shopId.id o.id %}" class="w-100 d-flex text-muted restaurant__change">
+                                {{o.order_note|truncatechars:50}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'restaurant-due-details' shopId.id o.id %}" class="text-center w-100 d-flex">
+                                <span class="iconify fs-4" data-icon="bx:bxs-chevron-right-circle" style="color: #4ec274;"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}                    
+                </tbody>
+            </table>
+        </section>
+    </div>
+</section>
+
+{% endblock %}

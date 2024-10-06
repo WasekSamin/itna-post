@@ -1,0 +1,111 @@
+{% extends "restaurant/base.html" %}
+{% load static %}
+
+{% block content %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/restaurant/openRestaurant.css' %}"
+/>
+<script src="{% static 'js/restaurant/moreDrop.js' %}" defer></script>
+{% include "restaurant/sidebar.html" %}
+
+<section class="restaurant__mainContent d-flex flex-wrap">
+  {% comment %}Restaurant left content starts{% endcomment %}
+    {% include "restaurant/openRestaurantLeftContent.html" %}
+  {% comment %}Restaurant left content ends{% endcomment %}
+
+  {% comment %}Restaurant right content starts{% endcomment %}
+  <div class="restaurant__rightContent">
+      {% comment %} Restaurant right navbar section starts{% endcomment %}
+      <section class="restaurant__rightNavbar px-2 d-flex justify-content-end">
+        <div class="restaurant__productSearchField bg-white d-flex align-items-center">
+            <span class="iconify text-muted" data-icon="ant-design:search-outlined"></span>
+            <input onkeyup="matchName(this)" class="w-100" type="search" placeholder="Search By Category..." >
+        </div>
+      </section>
+      {% comment %} Restaurant right navbar section starts{% endcomment %}
+
+        <div class="d-flex flex-column justify-content-between restaurant__rightMiddleAndBottom">
+            {% comment %}Restaurant right content middle section starts{% endcomment %}
+            <section class="restaurant__rightMiddleContent">
+                {% comment %} LOOP {% endcomment %}
+                {% for c in category %}
+                {% comment %} {{ emp_obj.role.permissions }} {% endcomment %}
+                {{ emp_obj.role.permissions }}
+                {{ permissions.0 }}
+                {% if not emp_obj.role.permission.all in permission.0 %}
+                {% if c.item_set.all|length > 0 %}
+                    <div class="restaurant__rightCategorySection border-bottom border-muted pb-2 my-2 mx-2">
+                        <h5 class="fw-bold mb-3 restaurant__catName">{{ c.category_name }}</h5>
+                        
+                        <section class="d-flex flex-wrap restaurant__categoryProductSection">
+                            {% for i in c.item_set.all %}
+                            <form method="POST" class="restaurant__categoryProductForm" action="">
+                                {% csrf_token %}
+                                <input hidden type="text" name="item_id" value="{{ i.id }}">
+                                <button class="card restaurant__rightProductCard p-0 {% if not i.item_img %}noImageCard{% endif %}">
+                                    <section class="restaurant__rightCatProduct w-100">
+                                        {% if i.item_img %}
+                                        <div class="restaurant__rightCatProdutImg">
+                                            <img src="{{ i.item_img.url }}" alt="">
+                                        </div>
+                                        {% endif %}
+
+                                        <div class="px-1">
+                                            <p>{{ shopId.currency.currency_icon }}{{ i.item_price }}</p>
+                                        </div>
+                                    </section>
+
+                                    <section class="px-2 {% if not i.item_img %}no__imageCardName{% endif %}">
+                                        <p class="fw-bold get__restaurantProductName">{{ i.item_name }}</p>
+                                    </section>
+                                </button>
+                            </form>
+                            {% endfor %}
+
+                            {% comment %}Extra{% endcomment %}
+                        
+                        </section>
+                    </div>
+                {% endif %}
+                {% else %}You dont have the authorization{% endif %}
+                {% endfor %}
+
+                {% comment %}Extra{% endcomment %}
+          
+               
+                
+            
+            </section>
+            {% comment %}Restaurant right content middle section ends{% endcomment %}
+
+            {% comment %}Restaurant right content bottom section starts{% endcomment %}
+            <section class="justify-content-end">
+                <div class="drop____down___btn" >
+                    <div class="innerDrop" id="advanceBtn">
+                           <ul>
+                            <li class="dropdown_____list p-2"> <a href="{% url 'AdvanceBooking' shopId.id %}" class="text-dark fw-bold" >Advance</a></li>
+                            <li class="p-1">
+                                <a href="{% url 'get_table_orders' shopId.id  %}" class="text-dark fw-bold">Table Orders</a>
+                            </li>
+                           </ul>
+                       
+                    </div>
+                    </div>
+                <div class="d-flex restaurant__rightBottom">
+                    <a class="fw-bold text-dark border border-muted p-3 text-center bg-white" href="{% url 'due-restaurant' shopId.id%}">Due</a>
+                    <a class="fw-bold text-dark border border-muted p-3 text-center bg-white" href="{% url 'restaurant-all-dues' shopId.id %}">All Dues</a>
+                    <a class="fw-bold text-dark border border-muted p-3 text-center bg-white" href="{% url 'restaurant-all-payments' shopId.id %}">Refund</a>
+                    <button class="fw-bold border border-muted bg-white" id="more_____btn" onclick="dropdown(this)">More <span class="iconify" data-icon="entypo:dots-three-vertical"></span></button>
+                </div>
+
+            </section>
+            
+            {% comment %}Restaurant right content bottom section ends{% endcomment %}
+        </div>
+  </div>
+  {% comment %}Restaurant right content ends{% endcomment %}
+</section>
+
+
+{% endblock %}

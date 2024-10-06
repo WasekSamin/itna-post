@@ -1,0 +1,98 @@
+.inner___accordion{
+  background-color: transparent !important;
+  border: none !important;
+}
+.accor____btn:not(.collapsed){
+  background-color: transparent !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+}
+.accor____btn{
+  padding: 0 15px !important;
+  margin: 0 !important;
+  background-color: transparent !important;
+}
+.session____submit___btn{
+  border: none;
+  outline: none;
+  padding: 8px 19px;
+  border-radius: 6px;
+  background-color: #212529;
+  color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#restaurant__sidebar {
+  position: fixed;
+  top: 0;
+  left: -1000%;
+  height: 100vh;
+  width: 30%;
+  z-index: 3;
+  background-color: var(--dark-blue-primary);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: left 0.3s ease-in-out;
+}
+
+.restaurant__overlay {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.restaurant__overlay.show__restaurantOverlay {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+#restaurant__sidebar.show__restaurantSidebar {
+    left: 0;
+}
+
+.close__restaurant__sidebar > svg {
+    font-size: 1.3rem;
+}
+
+.restaurant__sidebarTopSection > h5,
+.restaurant__sidebarBottomSection > div > p,
+.restaurant__sidebarBottomSection > div > a > p {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+
+/* Restaurant sidebar top section starts */
+.restaurant__sidebarTopSection > div {
+  cursor: pointer;
+}
+/* Restaurant sidebar top section ends */
+
+/* Restaurant sidebar bottom section starts */
+.restaurant__sidebarBottomSection {
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 3.5rem;
+}
+
+.restaurant__sidebarBottomSection::-webkit-scrollbar {
+  width: 6px;
+}
+
+.restaurant__sidebarBottomSection::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 9999px;
+  outline: none;
+}
+/* Restaurant sidebar bottom section ends */
+
+@media (max-width: 799px) {
+  #restaurant__sidebar {
+    width: 40%;
+  }
+}

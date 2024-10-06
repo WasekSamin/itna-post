@@ -1,0 +1,334 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+<!-- main new content start -->
+
+<!-- tab view start -->
+<div class="container tab______view">
+  <ul class="nav nav-pills mb-3 tab______nav" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        id="pills-General-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-General"
+        type="button"
+        role="tab"
+        aria-controls="pills-General"
+        aria-selected="true"
+      >
+        General
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link sub___tab"
+        id="pills-Pricing-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-Pricing"
+        type="button"
+        role="tab"
+        aria-controls="pills-Pricing"
+        aria-selected="false"
+      >
+        Pricing
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link sub___tab"
+        id="pills-Vendors-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-Vendors"
+        type="button"
+        role="tab"
+        aria-controls="pills-Vendors"
+        aria-selected="false"
+      >
+        Vendors
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link sub___tab"
+        id="pills-Taxes-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-Taxes"
+        type="button"
+        role="tab"
+        aria-controls="pills-Taxes"
+        aria-selected="false"
+      >
+        Taxes
+      </button>
+    </li>
+  </ul>
+  <form>
+    <div class="tab-content" id="pills-tabContent">
+      <div
+        class="tab-pane fade show active"
+        id="pills-General"
+        role="tabpanel"
+        aria-labelledby="pills-General-tab"
+      >
+        <div class="general_____part">
+          <div class="two____product">
+            <div class="input-group product____input mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Product Name"
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+                required
+              />
+            </div>
+            <div class="input-group product____input mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Product Short Name"
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-floating product____input mb-3">
+            <textarea
+              class="form-control"
+              placeholder="Description"
+              id="floatingTextarea2"
+              style="height: 100px"
+            ></textarea>
+            <label for="floatingTextarea2">Product Descriptions</label>
+          </div>
+
+          <div class="two____select mb-3">
+            <div class="inner____select">
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Choose Department...</option>
+                <option class="text-success" value="add">
+                  Add New Department
+                </option>
+              </select>
+            </div>
+            <div class="inner____select">
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Choose Category...</option>
+                <option class="text-success" value="add">
+                  Add New Category
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="two____select mb-3">
+            <div class="inner____select">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="UPC: "
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+                required
+              />
+            </div>
+            <div class="inner____select">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="SKU: "
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-check mb-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="activeNewItem"
+              checked
+            />
+            <label class="form-check-label" for="flexCheckChecked">
+              is ACTIVE
+            </label>
+          </div>
+
+          <div class="upload_____img mb-3">
+            <label for="uploadImg" class="fw-bold">Upload Image</label>
+            <input
+              type="file"
+              id="uploadImg"
+              name="uploadImg"
+              onchange="forupload(this)"
+              required
+            />
+            <p id="for-upload-name"></p>
+          </div>
+          <div class="mt-3">
+            <button type="button" class="done____btn">Done</button>
+            <button type="button" class="done____btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="tab-pane fade"
+        id="pills-Pricing"
+        role="tabpanel"
+        aria-labelledby="pills-Pricing-tab"
+      >
+        <div>
+          <label class="fw-bold">Buying Price: </label>
+          <input
+            type="number"
+            class="form-control mt-3"
+            placeholder="Buying Price.."
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+            required
+          />
+          <label class="mt-4 fw-bold">Selling Price: </label>
+          <input
+            type="number"
+            class="form-control mt-3"
+            placeholder="Selling Price.."
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+            required
+          />
+          <form>
+            <div class="mt-5">
+              <button type="button" class="done____btn">Done</button>
+              <button type="button" class="done____btn">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pills-Vendors"
+        role="tabpanel"
+        aria-labelledby="pills-Vendors-tab"
+      >
+        <div class="all______vendor">
+          <div class="vendor___select m-1">
+            <label class="fw-bold">Sekect Vendors: </label>
+            <select
+              class="form-select mt-3"
+              aria-label="Default select example"
+            >
+              <option selected>Select Vendors</option>
+              <option value="1">ITNA STORE</option>
+            </select>
+          </div>
+          <div class="m-1">
+            <button type="button" class="btn new____vendor">New Vendor</button>
+          </div>
+        </div>
+        <!-- department table start -->
+<div class="main____dept____table table-responsive">
+  <table class="table">
+    <thead class="table_____head">
+      <tr>
+        <th scope="col">
+          <div class="form-check">
+  
+          </div>
+        </th>
+        <th scope="col">Department</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">
+        
+        </th>
+        <td><a href="#" class="w-100 d-flex">Mark</a></td>
+        <td class="d-flex align-items-center">
+          <a href="#" class="w-100 d-flex">Mark</a>
+      
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+        </th>
+        <td><a href="#" class="w-100 d-flex">Mark2</a></td>
+        <td class="d-flex align-items-center">
+          <a href="#" class="w-100 d-flex">Mark2</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- department table end -->
+<form>
+  <div class="mt-5">
+    <button type="button" class="done____btn">Done</button>
+    <button type="button" class="done____btn">Cancel</button>
+  </div>
+</form>
+
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pills-Taxes"
+        role="tabpanel"
+        aria-labelledby="pills-Taxes-tab"
+      >
+        <div>
+          <div>
+            <form>
+              <label class="fw-bold">Tax Rate: </label> 
+              <input
+              type="number"
+              class="form-control mt-3"
+              placeholder="Tax Rate: "
+              aria-label="Example text with button addon"
+              aria-describedby="button-addon1"
+              required
+            />
+            </form>
+          </div>
+          <div>
+          <form>
+            <div class="mt-5">
+              <button type="submit" class="done____btn">Done</button>
+              <a href="#" type="button" class="done____btn">Cancel</a>
+            </div>
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- tab view end -->
+
+<!-- main new content end -->
+
+<script>
+  const forfile = () => {
+    const FileName = document.querySelector("#uploadImg").value;
+
+    let docFileMain = FileName.split("\\");
+    docFileMain = docFileMain[docFileMain.length - 1];
+    document.querySelector("#for-doc-file-name").innerText = docFileMain;
+  };
+
+  function forupload(e) {
+    let fileVal = e.files[0].name;
+
+    document.querySelector("#for-upload-name").innerText = fileVal;
+    document.querySelector("#for-upload-name").style.display = "block";
+    document.querySelector("#for-upload-name").style.background = "#f5f5f5";
+  }
+</script>

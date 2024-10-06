@@ -1,0 +1,81 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+<script src="{% static 'js/admin-panel/brandHome.js' %}" defer></script>
+
+<!-- search content start -->
+<div class="main____search________content">
+  <div class="search_____content me-1 mt-2">
+    <form>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search By Name....."
+          aria-label=""
+          aria-describedby="basic-addon1"
+          onkeyup="matchBrandName(this)"
+        />
+        <div class="input-group-prepend">
+          <button class="btn search_____btn" type="button">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="me-1 mt-2">
+    <!-- Example split danger button -->
+    <div class="btn-group">
+      <a href="{% url 'create-brand' shop_id.id %}" class="btn new____dept text-white">
+        New Brand
+      </a>
+      <button
+        type="button"
+        class="btn dropdown-toggle dropdown-toggle-split new____dept"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <span class="visually-hidden">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu new____dept">
+        {% comment %} <li><a class="dropdown-item text-white" href="{% url 'create-department-category' %}">New Department</a></li> {% endcomment %}
+        <li><a class="dropdown-item text-white" href="{% url 'create-product' shop_id.id %}">New Item</a></li>
+        <li><a class="dropdown-item text-white" href="{% url 'create-category' shop_id.id %}">New Category</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- search content end -->
+
+<!-- department table start -->
+<div class="main____dept____table table-responsive">
+  <table class="table">
+    <thead class="table_____head">
+      <tr>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody class="brand__table">
+      {% if brands|length > 0 %}
+      {% for brand in brands %}
+      <tr>
+        <td class="category__data"><a href="{% url 'edit-brand' shop_id.id brand.id %}" class="w-100 d-flex text-dark category__name">{{ brand.brand_name }}</a></td>
+        <td class="d-flex align-items-center">
+          <a href="{% url 'edit-brand' shop_id.id brand.id %}" class="w-100 d-flex text-dark">Active</a>
+          <form method="POST" action="{% url 'admin-delete-brand' shop_id.id brand.id %}">
+            {% csrf_token %}
+            <button class="border-0 bg-white" type="submit"><span
+                class="iconify cross___icon"
+                data-icon="emojione:cross-mark"
+              ></span></button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+      {% else %}No Category Added{% endif %}
+    </tbody>
+  </table>
+</div>
+<!-- department table end -->

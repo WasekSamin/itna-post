@@ -1,0 +1,86 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}">
+
+<script src="{% static 'js/admin-panel/adminpanelAdvanceOrders.js' %}" defer></script>
+
+<!-- search content start -->
+<div class="main____search________content">
+    <div class="search_____content me-1 mt-2">
+      <form>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here....."
+            aria-label=""
+            aria-describedby="basic-addon1"
+            onkeyup="matchName(this)"
+          />
+          <div class="input-group-prepend">
+            <button class="btn search_____btn" type="button">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div>
+      <div class="dropdown me-1 mt-2">
+          <form method="POST" action="{% url 'export-advance-order-data' shop_id.id %}">{% csrf_token %}
+            <button class="search_________btn" type="submit">
+                <span class="iconify" data-icon="bx:bx-export"></span> Export
+            </button>
+          </form>
+        </div>
+    </div>
+  </div>
+  <!-- search content end -->
+
+<div class="main____table table-responsive">
+    <table class="table">
+      <thead class="table_____head">
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Number Of People</th>
+          <th scope="col">Advance Amount</th>
+          <th scope="col">Payment Method</th>
+        </tr>
+      </thead>
+      <tbody class="admin__orderTable">
+        {% if orders %}
+        {% for o in orders %}
+        <tr>
+          <td class="fw-bold">
+            <a href="#" class="text-dark text-decoration-none w-100 d-flex">
+              {{ o.created_at }}
+            </a>
+          </td>
+        
+          <td>
+            <a href="#" class="text-dark text-decoration-none w-100 d-flex">
+              {{ o.customer_name }}
+            </a>
+          </td>
+          <td>
+            <a href="#" class="text-dark text-decoration-none w-100 d-flex">
+              {{ o.number_of_people }}
+            </a>
+          </td>
+          <td>
+            <a href="#" class="text-dark text-decoration-none w-100 d-flex">
+                {{ shop_id.currency.currency_icon }}{{ o.advance_amount }}
+            </a>
+          </td>
+          <td>
+            <a href="#" class="text-dark text-decoration-none w-100 d-flex">
+                {{ o.method }}
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>

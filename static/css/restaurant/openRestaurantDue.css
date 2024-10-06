@@ -1,0 +1,173 @@
+.restaurant__cashButtons {
+  display: none !important;
+}
+
+.restaurant__rightContent {
+  position: fixed;
+  left: 40%;
+  width: 60%;
+  height: 100vh;
+}
+
+#restaurant__bottomSection {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.restaurant__rightTopNavbar {
+  width: 100%;
+  padding: 1.6rem 0;
+  background-color: var(--blue-primary);
+}
+
+#restaurant__dueOrderForm > .card {
+  width: 50vw;
+  min-height: 12rem;
+}
+
+.restaurant__dueInputSize,
+.restaurant__calendar,
+#restaurant__selectUser {
+  width: 20vw;
+  padding: 4px 8px;
+  outline: none;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+#restaurant__selectUser {
+  padding: 3px 0;
+}
+
+textarea.restaurant__dueInputSize {
+  resize: none;
+}
+
+.restaurant__calendar > input {
+  outline: none;
+  flex: 1;
+  border: none;
+}
+
+.restaurant__dueInputSize:focus-within,
+.restaurant__calendar:focus-within,
+#restaurant__selectUser:focus-within {
+  box-shadow: 0 0 3px 3px var(--blue-third-primary);
+}
+
+.restaurant__saveDueBtnSection {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 3.5rem;
+  width: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.restaurant__saveDueBtnSection > button {
+  width: 100%;
+  height: 100%;
+  padding: 10px 25px;
+  border: 2px solid var(--dark-primary);
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  background: var(--dark-primary);
+  z-index: 1;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.restaurant__saveDueBtnSection > button:last-child {
+  border: 2px solid var(--green-primary);
+  background-color: var(--green-primary);
+}
+
+.restaurant__saveDueBtnSection > button::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background: var(--background-primary);
+  transition: all 0.3s ease;
+}
+
+.restaurant__saveDueBtnSection > button:hover {
+  color: var(--dark-primary) !important;
+}
+
+.restaurant__saveDueBtnSection > button:hover::after {
+  left: 0;
+  width: 100%;
+}
+
+.restaurant__saveDueBtnSection > button:active {
+  top: 2px;
+}
+
+/* Datepicker style */
+#ui-datepicker-div {
+  background-color: var(--white-primary);
+  padding: 5px 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.ui-datepicker-next {
+  float: right;
+}
+
+.ui-corner-all {
+  cursor: pointer;
+}
+
+[data-handler="selectDay"] {
+  padding: 2px 5px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+[data-handler="selectDay"]:hover {
+  background-color: var(--blue-primary);
+  text-align: center;
+}
+
+[data-handler="selectDay"] > a {
+  transition: color 0.2s ease-in-out;
+}
+
+[data-handler="selectDay"]:hover > a {
+  color: var(--white-primary);
+}
+
+@media (min-height: 1000px) {
+  .restaurant__saveDueBtnSection {
+    padding-bottom: 5rem;
+  }
+}
+
+@media (min-height: 1300px) {
+  .restaurant__saveDueBtnSection {
+    padding-bottom: 7rem;
+  }
+}
+
+@media (min-height: 2000px) {
+  .restaurant__saveDueBtnSection {
+    padding-bottom: 10rem;
+  }
+}
+
+@media (max-width: 1078px) {
+  .restaurant__calendar > svg {
+    display: none;
+  }
+}

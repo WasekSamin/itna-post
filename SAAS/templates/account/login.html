@@ -1,0 +1,18 @@
+{% load static %}
+{% include 'account/base.html' %}
+
+<div class="main">
+    <p class="sign" align="center">Log In</p>
+    <form class="form1" method="POST" action="">
+      {% csrf_token %}
+        <input class="un " autofocus="true" type="text" name="username" align="center" placeholder="Username" required>
+        <input class="pass" type="password" name="password" align="center" placeholder="Password" required>
+        <button type="submit" class="submit" align="center">Log in</button>
+        <p class="forgot" align="center"><a href="#">Forgot Password?</a></p>       
+      </form>
+      <section class="text-center">
+        <small class="text-muted">
+          Don't have an account? <a href="{% url 'registration' %}" class="text-primary text-decoration-underline">Sign Up</a>
+        </small>
+      </section>
+    </div>

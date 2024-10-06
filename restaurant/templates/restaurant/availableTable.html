@@ -1,0 +1,91 @@
+{% extends "restaurant/base.html" %}
+{% load static %}
+
+{% block content %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/restaurant/availableTables.css' %}"
+/>
+
+<link rel="stylesheet" href="{% static 'css/restaurant/openRestaurant.css' %}" />
+
+{% include "restaurant/sidebar.html" %}
+
+<section class="restaurant__mainContent d-flex flex-wrap">
+  <div class="table____left___message">
+    <p class="fs-3 fw-bold text-success">Please!
+      Select Your Table.</p>
+  </div>
+
+    {% comment %}Restaurant left content starts{% endcomment %}
+      {% include "restaurant/openRestaurantLeftContent.html" %}
+    {% comment %}Restaurant left content ends{% endcomment %}
+  
+    {% comment %}Restaurant right content starts{% endcomment %}
+   
+  <div class="restaurant__rightContent">
+    
+    {% comment %} Restaurant right navbar section starts{% endcomment %}
+    <section class="restaurant__rightNavbar px-2 d-flex justify-content-end">
+      <div class="restaurant__productSearchField bg-white d-flex align-items-center">
+          <span class="iconify text-muted" data-icon="ant-design:search-outlined"></span>
+          <input onkeyup="matchName(this)" class="w-100" type="search" placeholder="Search By Category..." >
+      </div>
+    </section>
+    {% comment %} Restaurant right navbar section starts{% endcomment %}
+
+      <div class="d-flex flex-column justify-content-between restaurant__rightMiddleAndBottom">
+          {% comment %}Restaurant right content middle section starts{% endcomment %}
+          <section class="restaurant__rightMiddleContent">
+                  <div class="restaurant__rightCategorySection pb-2 my-2 mx-2">
+                      
+                     <!-- tbale start -->
+    {% if tables %}
+    <div class="main____table____div">
+      
+            {% for t in tables %}
+                <a href="{% url 'TableDetails' t.shop.id t.id %}" class="table____div m-3">
+                    <p>{{ t.table_name }}</p>
+                </a>
+            {% endfor %}
+    </div>
+    {% else %}
+    <div class="not____found___table">
+      <img src="{% static 'images/no-table.png' %}">
+    </div>
+    {% endif %}
+    <!-- table end -->
+
+                  </div>
+
+              {% comment %}Extra{% endcomment %}
+        
+             
+              
+
+          </section>
+          {% comment %}Restaurant right content middle section ends{% endcomment %}
+
+          {% comment %}Restaurant right content bottom section starts{% endcomment %}
+          <section class="justify-content-end">
+
+              <div class="d-flex restaurant__rightBottom">
+                  <a class="fw-bold text-dark border border-muted p-3 text-center bg-white" href="{% url 'due-restaurant' shopId.id%}">Due</a>
+                  <a class="fw-bold text-dark border border-muted p-3 text-center bg-white" href="#">Drawer</a>
+                  <a class="fw-bold text-dark border border-muted p-3 text-center bg-white" href="{% url 'restaurant-all-payments' shopId.id %}">Refund</a>
+                  <button class="fw-bold border border-muted bg-white">More <span class="iconify" data-icon="entypo:dots-three-vertical"></span></button>
+              </div>
+          </section>
+          {% comment %}Restaurant right content bottom section ends{% endcomment %}
+      </div>
+</div>
+{% comment %}Restaurant right content ends{% endcomment %}
+  </section>
+
+  <!-- table start -->
+
+<!-- table ends -->
+
+
+
+{% endblock %}

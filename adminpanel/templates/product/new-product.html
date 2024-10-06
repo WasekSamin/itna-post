@@ -1,0 +1,352 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+<script src="{% static 'js/admin-panel/editProduct.js' %}" defer></script>
+
+<!-- main new content start -->
+
+<!-- tab view start -->
+<div class="container tab______view">
+  <ul class="nav nav-pills mb-3 tab______nav" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        id="pills-General-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-General"
+        type="button"
+        role="tab"
+        aria-controls="pills-General"
+        aria-selected="true"
+      >
+        General
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link sub___tab"
+        id="pills-Pricing-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-Pricing"
+        type="button"
+        role="tab"
+        aria-controls="pills-Pricing"
+        aria-selected="false"
+      >
+        Pricing
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link sub___tab"
+        id="pills-Vendors-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-Vendors"
+        type="button"
+        role="tab"
+        aria-controls="pills-Vendors"
+        aria-selected="false"
+      >
+        Vendors
+      </button>
+    </li>
+  </ul>
+  <input type="hidden" id="get__shopId__create" value="{{ shop_id.id }}" />
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="tab-content" id="pills-tabContent">
+      <div
+        class="tab-pane fade show active"
+        id="pills-General"
+        role="tabpanel"
+        aria-labelledby="pills-General-tab"
+      >
+        <div class="general_____part">
+          <div class="two____product">
+            <div class="input-group product____input mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Product Name"
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+                name="item_name"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-floating product____input mb-3">
+            <textarea
+              class="form-control"
+              placeholder="Description"
+              id="floatingTextarea2"
+              name ="product_descriptions"
+              style="height: 100px"
+            ></textarea>
+            <label for="floatingTextarea2">Product Descriptions</label>
+          </div>
+           <div class="two____select mb-3">
+            <div class="inner____select">
+              <p>Choose Category</p>
+              <select class="form-select" aria-label="Default select example" onchange="createCategory(this)" name="category" required>
+                {% for c in categories %}
+                <option class="text-success" value="{{ c.id }}">
+                  {{ c.category_name }}
+                </option>
+                {% endfor %}
+                <option class="text-success" value="add-category">
+                  Add New Category
+                 </option>
+              </select>
+            </div>
+
+            <div class="inner____select">
+              <p class="text-muted">Choose Brand(optional)</p>
+              <select class="form-select" aria-label="Default select example" onchange="createBrand(this)" name="brand">
+                {% for brand in brands %}
+                <option class="text-success" value="{{ brand.id }}">
+                  {{ brand.brand_name }}
+                </option>
+                {% endfor %}
+                <option class="text-success" value="add-brand">
+                  Add New Brand
+                </option>
+              </select>
+            </div>
+           </div>
+
+ 
+
+          <div class="two____select mb-3">
+            <div class="inner____select">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="UPC: "
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+                name="upc"
+              />
+            </div>
+            <div class="inner____select">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="SKU: "
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+                name="sku"
+              />
+            </div>
+          </div>
+         
+          <div class="stock_____product">
+            <div>
+              <label for="stockPro" class="form-label">Product Stock</label>
+              <input type="number" value="0" name="product_stock" id="stockPro" class="form-control" placeholder="Product Stock" aria-describedby="passwordHelpBlock">
+            </div>
+
+            <div>
+              <label class="form-label">Out Of Stock</label>
+              <select name="out_of_stock" class="form-select" aria-label="Default select example">
+                <option value="yes">Yes</option>
+                <option selected value="no">No</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="activeNewItem"
+              checked
+            />
+            <label class="form-check-label" for="flexCheckChecked">
+              is ACTIVE
+            </label>
+          </div>
+
+          <div class="upload_____img mb-3">
+            <label for="createuploadImg" class="fw-bold">Upload Image</label>
+            <input
+              type="file"
+              id="createuploadImg"
+              name="uploadImg"
+              onchange="forupload(this)"
+              name="item_img"
+              accept="image/*"
+            />
+            <div class="my-2">
+              <img id="product__img" style="width: 5rem; height: 5rem; object-fit: cover" src="" alt="" />
+            </div>
+         
+          </div>
+          <div class="mt-3">
+            <button type="button" class="done____btn" id="general_btn" onclick="generalPart()">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="tab-pane fade"
+        id="pills-Pricing"
+        role="tabpanel"
+        aria-labelledby="pills-Pricing-tab"
+      >
+        <div>
+          <label class="fw-bold">Buying Price: </label>
+          <input
+            type="number"
+            class="form-control mt-3"
+            placeholder="Buying Price.."
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+            name="buying_price"
+          />
+          <label class="mt-4 fw-bold">Selling Price: </label>
+          <input
+            type="number"
+            class="form-control mt-3"
+            placeholder="Selling Price.."
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+            name="item_price"
+            required
+          />
+            <div class="mt-5">
+              <button type="button" class="done____btn" id="price_btn" onclick="pricePart()">Next</button>
+              <button type="button" class="done____btn" id="price_btn_pre" onclick="pricePartPre()">Previous</button>
+            </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pills-Vendors"
+        role="tabpanel"
+        aria-labelledby="pills-Vendors-tab"
+      >
+        <div class="all______vendor">
+          <div class="vendor___select m-1">
+            <label class="fw-bold text-muted">Select Vendors: </label>
+            <select
+              class="form-select mt-3"
+              aria-label="Default select example"
+              name="vendor"
+            >
+            <option value="" selected>Select Vendors</option>
+            {% for v in vendors %}
+              <option value="{{ v.id }}">{{ v.vendor_name }}</option>
+            {% endfor %}
+            </select>
+          </div>
+          <div class="m-1">
+            <a href="{% url 'create-vendor' shop_id.id %}" type="button" class="btn new____vendor">New Vendor</a>
+          </div>
+        </div>
+        <!-- department table start -->
+<div class="main____dept____table table-responsive">
+  <table class="table">
+    <thead class="table_____head">
+      <tr>
+        <th scope="col">
+          <div class="form-check">
+  
+          </div>
+        </th>
+        <th scope="col">Vendor Name</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for vv in vendors %}
+      <tr>
+        <th scope="row">
+        
+        </th>
+        <td><a href="#" class="w-100 d-flex">{{ vv.vendor_name }}</a></td>
+        <td class="d-flex align-items-center">
+          <a href="#" class="w-100 d-flex">ACTIVE</a>
+      
+        </td>
+      </tr>
+      {% endfor %}
+    
+    </tbody>
+  </table>
+</div>
+<!-- department table end -->
+  <div class="mt-5">
+    <button type="submit" class="done____btn">Done</button>
+    <a href="{% url 'product' shop_id.id %}" type="button" class="done____btn">Cancel</a>
+  </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+<!-- tab view end -->
+
+<!-- main new content end -->
+
+<script>
+  const image = document.getElementById("product__img")
+  image.style.display = "none"
+
+  function forupload(e) {
+    let fileVal = e.files[0];
+
+    if (fileVal) {
+      document.querySelector("#product__img").src = URL.createObjectURL(fileVal);
+      image.style.display = "block"
+    }
+  }
+
+
+
+  // tab view 
+  // tab view id
+  const generalTab = document.getElementById("pills-General-tab")
+  const priceTab = document.getElementById("pills-Pricing-tab")
+  const vendorTab = document.getElementById("pills-Vendors-tab")
+  const taxTab = document.getElementById("pills-Taxes-tab")
+
+  // tab container
+  const generalDiv = document.getElementById("pills-General")
+  const priceDiv = document.getElementById("pills-Pricing")
+  const vendorDiv = document.getElementById("pills-Vendors")
+  const taxDiv = document.getElementById("pills-Taxes")
+
+
+  // btn
+  const generalBtn = document.getElementById("general_btn")
+  const priceBtn = document.getElementById("price_btn")
+  const vendorBtn = document.getElementById("vendor_btn")
+  const pricePre = document.getElementById("price_btn_pre")
+
+
+  function generalPart(){
+    generalTab.classList.remove("active")
+    generalDiv.classList.remove("active")
+    priceTab.classList.add("active")
+    priceDiv.classList.add("active", "show")
+  }
+
+  function pricePart() {
+    priceTab.classList.remove("active")
+    priceDiv.classList.remove("active")
+    vendorTab.classList.add("active")
+    vendorDiv.classList.add("active", "show")
+  }
+   
+  function pricePartPre(){
+    priceTab.classList.remove("active")
+    priceDiv.classList.remove("active")
+    generalTab.classList.add("active")
+    generalDiv.classList.add("active", "show")
+  }
+
+
+</script>

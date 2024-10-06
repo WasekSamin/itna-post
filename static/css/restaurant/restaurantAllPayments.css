@@ -1,0 +1,22 @@
+/* Restaurant all payment header section starts */
+#restaurant__allPaymentHeader {
+    background-color: var(--blue-primary);
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+.restaurant__allOrdersHeaderTitle > h5 {
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+}
+
+.restaurant__allPaymentsSearchContent {
+    width: 20rem;
+    border-radius: 5px;
+}
+
+.restaurant__allPaymentsSearchContent > input {
+    outline: none;
+    border: none;
+}
+/* Restaurant all payment header section ends */

@@ -1,0 +1,83 @@
+:root {
+    --dark-primary: #111;
+    --white-primary: #fff;
+    --background-primary: #f5f5f5;
+}
+
+.go___back p a{
+    text-decoration: none;
+}
+.go___back p{
+    margin-block-end: 0;
+    margin-block-start: 0;
+}
+.fileInput{
+    visibility: hidden;
+}
+.uploadLabel{
+    border: 1px solid var(--black);
+    padding: 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing:1px;
+    font-weight: 600;
+}
+
+.main___shop____setting input, .main___shop____setting textarea{
+    background-color: var(--deep-white);
+}
+
+.main___shop____setting{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.mushak__input {
+    display: none;
+}
+
+.mushak__check:checked~.mushak__input {
+    display: block;
+}
+
+.shop_settingsBtn {
+  width: 100%;
+  height: auto;
+  padding: 10px 25px;
+  border: 2px solid var(--dark-primary);
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  background: var(--dark-primary);
+  color: var(--white-primary);
+  z-index: 1;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.shop_settingsBtn::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background: var(--background-primary);
+  transition: all 0.3s ease;
+}
+
+.shop_settingsBtn:hover {
+  color: var(--dark-primary) !important;
+}
+
+.shop_settingsBtn:hover::after {
+  left: 0;
+  width: 100%;
+}
+
+.shop_settingsBtn:active {
+  top: 2px;
+}

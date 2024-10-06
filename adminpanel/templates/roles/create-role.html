@@ -1,0 +1,37 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="container create____roles___list mt-4"> <label class="fs-5">Enter Role Title</label>
+    
+        <div>
+            <div class="input-group mt-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="role_title"
+                  placeholder="Create roles here..."
+                  aria-label="Example text with button addon"
+                  aria-describedby="button-addon1"
+                  required
+                />
+              </div></div>
+        <div><input type="checkbox" name="is_admin" value="yes"> Is Admin</div>
+            <div><input type="checkbox" name="can_config_pos" value="yes"> Can Config POS</div>
+       <div> <input type="checkbox" name="can_config_roles" value="yes"> Can Config Roles</div>
+       <div><input type="checkbox" name="can_config_orders" value="yes"> Can Config orders</div>
+        <div><input type="checkbox" name="can_config_inventory" value="yes"> Can Config Inventory</div>
+            <div><input type="checkbox" name="can_config_customers" value="yes"> Can Config Customers</div>
+                <div><input type="checkbox" name="can_config_vendors" value="yes"> Can Config Vendors</div>
+                    <div> <input type="checkbox" name="can_config_tables" value="yes"> Can Config Tables</div>
+                        <div><input type="checkbox" name="can_config_emps" value="yes"> Can Config Employees</div>
+                            <div><input type="checkbox" name="can_manage_settings" value="yes"> Can Manage Settings</div>
+                            <div class="d-flex justify-content-flex-start mt-4"><button class="edit___permission__btn" type="submit">SAVE</button></div>
+                            
+</div>
+    
+</form>

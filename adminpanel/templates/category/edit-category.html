@@ -1,0 +1,38 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+<!-- main edit content start -->
+<div class="edit_______div container">
+  <form method="POST" action="{% url 'admin-edit-category' shop_id.id category_obj.id %}">{% csrf_token %}
+    <p class="fw-bold">Category Name:</p>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        name="category_name"
+        value="{{ category_obj.category_name }}"
+        placeholder="Category Name..."
+        aria-label="Example text with button addon"
+        aria-describedby="button-addon1"
+        required
+      />
+    </div>
+    <div class="mt-4">
+      <label class="fw-bold">Select Your Shop: </label>
+      <select class="form-select mt-2" name="category_shop" aria-label="Default select example" required>
+        {% for shop in user_shops %}
+        <option value="{{ shop.id }}">{{ shop.shop_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="done____btn">Done</button>
+        <a class="done____btn text-white" href="{% url "category" shop_id.id %}">
+          Cancel
+        </a>
+    </div>
+  </form>
+</div>
+<!-- main edit content end -->

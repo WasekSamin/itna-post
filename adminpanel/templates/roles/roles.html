@@ -1,0 +1,41 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+
+<div class="permisson____btn">
+    <a class="per_____btn" href="{% url "createRolesView" shop_id.id %}">Create Roles</a>
+    </div>
+
+
+{% comment %} permission table start {% endcomment %}
+<div class="main____dept____table table-responsive">
+    <table class="table">
+      <thead class="table_____head">
+        <tr>
+          <th scope="col">Role</th>
+        </tr>
+      </thead>
+      <tbody class="catgory__table">
+        {% if roles %}
+        {% for r in roles %}
+    <tr>
+        <td class="category__data d-flex justify-content-space-between"><a href="{% url 'editRolesView' r.id shop_id.id %}" class="w-100 d-flex text-dark category__name">
+            {{ r.role_title }}
+        </a> 
+        <form method="POST" action="{% url 'deleteRolesView' r.id shop_id.id %}">
+          {% csrf_token %}
+          <button class="border-0 bg-white" type="submit"><span
+              class="iconify cross___icon"
+              data-icon="emojione:cross-mark"
+            ></span></button>
+        </form></td>
+    </tr>
+
+        
+        {% endfor %}
+        {% else %}No Roles Added {% endif %}
+</tbody>
+</table>
+</div>

@@ -1,0 +1,102 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}">
+
+<script src="{% static 'js/admin-panel/adminpanelDueOrders.js' %}" defer></script>
+
+<!-- search content start -->
+<div class="main____search________content">
+    <div class="search_____content me-1 mt-2">
+      <form>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here....."
+            aria-label=""
+            aria-describedby="basic-addon1"
+            onkeyup="matchName(this)"
+          />
+          <div class="input-group-prepend">
+            <button class="btn search_____btn" type="button">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div>
+      <div class="dropdown me-1 mt-2">
+          <form method="POST" action="{% url 'export-due-data' shop_id.id %}">{% csrf_token %}
+            <button class="search_________btn" type="submit">
+                <span class="iconify" data-icon="bx:bx-export"></span> Export
+            </button>
+          </form>
+        </div>
+    </div>
+  </div>
+  <!-- search content end -->
+
+<div class="main____table table-responsive">
+    <table class="table">
+      <thead class="table_____head">
+        <tr>
+          <th scope="col">Created At</th>
+          <th scope="col">Is Due Clear</th>
+          <th scope="col">Order ID</th>
+          <th scope="col">Submission Date</th>
+          <th scope="col">Due Total</th>
+          <th scope="col">Order Note</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody class="admin__orderTable">
+        {% if orders %}
+        {% for o in orders %}
+        <tr>
+          <td class="fw-bold">
+            <a href="{% url 'restaurant-due-details' shop_id.id o.id%}" class="text-dark text-decoration-none w-100 d-flex">
+              {{ o.created_at }}
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'restaurant-due-details' shop_id.id o.id%}" class="text-dark text-decoration-none w-100 d-flex">
+              {% if not o.due_clear %}
+                <p><span class="iconify fs-4" data-icon="gridicons:cross-circle" style="color: #dc3545;"></span></p>
+                {% else %}
+                <p><span class="iconify fs-4" data-icon="teenyicons:tick-circle-solid" style="color: #198754;"></span></p>
+              {% endif %}
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'restaurant-due-details' shop_id.id o.id%}" class="text-dark text-decoration-none w-100 d-flex">
+            #{{ o.id }}
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'restaurant-due-details' shop_id.id o.id%}" class="text-dark text-decoration-none w-100 d-flex">
+              {{ o.submission_date }}
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'restaurant-due-details' shop_id.id o.id%}" class="text-dark text-decoration-none w-100 d-flex">
+              {{ shop_id.currency.currency_icon }}{{ o.due_grand_total }}
+            </a>
+          </td>
+          <td>
+    
+            <a href="{% url 'restaurant-due-details' shop_id.id o.id%}" class="text-dark text-decoration-none w-100 d-flex">
+                {{ o.order_note }}
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'restaurant-due-details' shop_id.id o.id%}" class="text-dark text-decoration-none w-100 d-flex">
+              <p><span class="iconify fs-4" data-icon="akar-icons:circle-chevron-right-fill" style="color: #198754;"></span></p>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>

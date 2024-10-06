@@ -1,0 +1,15 @@
+{% include 'exceptions/base.html' %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/admin-panel/warning.css' %}">
+
+<div class="main___div">
+    <div class="main____warning">
+        <p class="icon____logo"><span class="iconify warning_icon" data-icon="ant-design:warning-outlined"></span></p>
+        <p class="fs-2 fw-bold mt-2">Warning!</p>
+        <p>Sorry! You are not the owner of this shop.</p>
+        <div class="d-flex justify-content-center mt-3">
+            <a href="{% url 'landing' %}">Go Back Home</a>
+        </div>
+    </div>
+</div>

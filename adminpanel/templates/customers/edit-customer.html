@@ -1,0 +1,87 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+<!-- main new content start -->
+
+<!-- tab view start -->
+
+<form action="{% url 'admin-customer-edit' shop_id.id customer_obj.id %}" method="POST">{% csrf_token %}
+  <div class="container">
+    {% for message in messages %}
+      <p class="fw-bold text-center text-danger mt-2">{{ message }}</p>
+    {% endfor %}
+    <div class="general_____part mt-5">
+      <p class="text-center fs-3">
+        Customer Type: <span class="fw-bold text-primary">Personal</span>
+      </p>
+  
+      <div>
+          <div class="row">
+            <div class="col">
+              <p>Customer Name:</p>
+              <p>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="{{ customer_obj.customer_name }}"
+                  placeholder="Customer name"
+                  name="cust_name"
+                  required
+                />
+              </p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <p>Customer Contact:</p>
+              <p>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Customer Contact"
+                  value="{{ customer_obj.customer_contact }}"
+                  name="cust_contact"
+                  required
+                />
+              </p>
+            </div>
+          </div>
+  
+          <div class="mt-2">
+            <p>Email:</p>
+            <p>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="whatever@gmail.com"
+                value="{{ customer_obj.customer_email }}"
+                name="cust_email"
+                required
+              />
+            </p>
+          </div>
+
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="cust_address" required>{{ customer_obj.customer_add }}</textarea>
+            <label for="floatingTextarea">Customer Address</label>
+          </div>
+
+          <div class="mt-2">
+            <p><span class="fw-bold">Created At:</span> {{ customer_obj.created_at }}</p>
+          </div>
+
+          <div class="mt-3">
+            <button type="submit" class="done____btn">Done</button>
+            <a href="{% url 'customer' shop_id.id %}" class="done____btn text-white">Cancel</a>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+<!-- tab view end -->
+
+<!-- main new content end -->

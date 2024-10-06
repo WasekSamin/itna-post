@@ -1,0 +1,406 @@
+/* Restaurant cash modal section starts */
+.restaurant__cashModal {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  transition: all 0.3s ease-in-out;
+}
+
+.cash__paymentMethod {
+  gap: 0.5rem;
+}
+
+#restaurant__creditCardField,
+#restaurant__bkashField,
+#restaurant__nagadfield {
+  display: none;
+}
+
+#restaurant__creditCardPaymentInput:checked ~ #restaurant__creditCardField,
+#restaurant__bkashPaymentInput:checked ~ #restaurant__bkashField,
+#restaurant__nagadPaymentInput:checked ~ #restaurant__nagadfield {
+  display: block;
+}
+
+.restaurant__cashModal.show__restaurantCashModal {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.restaurant__cashModal > .card {
+  width: 30rem;
+  position: relative;
+}
+
+#close__restaurantModal {
+  position: absolute;
+  top: 0;
+  right: 1%;
+  cursor: pointer;
+}
+
+#close__restaurantModal:active {
+  transform: scale(0.7);
+}
+
+#close__restaurantModal > form > svg {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.restaurant__cashDiscountField,
+#received__cash, #customer-name, #customer-phone {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+#received__cash, #customer-name, #customer-phone,
+.restaurant__cashDiscountField > input {
+  outline: none;
+}
+
+.restaurant__cashDiscountField > input {
+  flex: 1;
+  border: none;
+}
+
+.restaurant__cashDiscountField:focus-within,
+#received__cash:focus-within, #customer-name:focus-within, #customer-phone:focus-within {
+  box-shadow: 0 0px 3px 3px var(--blue-third-primary);
+}
+
+#restaurant__modalOverlay {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  transition: all 0.3s ease-in-out;
+}
+
+#restaurant__modalOverlay.show__restaurantModalOverlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Restaurant cash modal section ends */
+
+.restaurant__amountReceived > p {
+  margin-block-start: 0.3rem !important;
+  margin-block-end: 0.3rem !important;
+}
+
+.restaurant__leftMiddleSection > div > p,
+.restaurant__productQuantity > p,
+.restaurant__walkIn > p,
+.restaurant__rightCatProduct > div:last-child > p,
+.restaurant__modelTotalAmount > h5,
+.restaurant__amountReceived > p:last-child {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+
+/* Restaurant left content starts */
+.restaurant__leftContent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* Restaurant left content top section starts */
+.restaurant__leftNavbar {
+  padding-top: 0.9rem;
+  padding-bottom: 0.8rem;
+  background-color: var(--blue-primary);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+.restaurant__hamburgerMenu {
+  margin-top: -0.2rem !important;
+  background-color: var(--blue-second-primary);
+  padding: 3px 6px;
+  cursor: pointer;
+}
+
+.restaurant__hamburgerMenu:active {
+  background-color: var(--background-primary);
+}
+
+.restaurant__hamburgerMenu > svg {
+  font-size: 1.7rem;
+}
+
+.restaurant__clearUser > div {
+  cursor: pointer;
+}
+
+.restaurant__clearUser > div > svg {
+  font-size: 1.5rem;
+}
+
+.restaurant__walkIn {
+  position: relative;
+}
+
+.restaurant__walkIn > p {
+  cursor: pointer;
+  z-index: 50 !important;
+}
+
+.restaurant__CustomerList {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 20rem;
+  height: 100vh;
+  z-index: 50 !important;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+}
+
+.restaurant__CustomerList.show__resstaurantCustomerList {
+  opacity: 1;
+  visibility: visible;
+}
+
+.restaurant__customerListContent {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 3rem !important;
+}
+
+.restaurant__customerListContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.restaurant__customerListContent::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 9999px;
+  outline: none;
+}
+
+.restaurant__CustomerList > section {
+  padding: 6px 10px;
+  background-color: var(--background-primary);
+}
+
+.restaurant__CustomerList > section > input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.restaurant__CustomerList > section > svg {
+  font-size: 1.5rem;
+}
+
+.restaurant__customerListContent > div {
+  cursor: pointer;
+}
+
+.restaurant__searchUsernameText {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+
+#restaurant__addNewCustomer {
+  font-weight: 500;
+  position: relative;
+  z-index: 500;
+}
+
+#restaurant__addNewCustomer > svg {
+  font-size: 1rem;
+}
+
+#restaurant__addNewCustomerForm {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  top: 130%;
+  right: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+#restaurant__addNewCustomerForm.show__restaurantAddNewCustomerForm {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#restaurant__addNewCustomerForm > .card {
+  width: 25rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+/* Restaurant left content top section ends */
+
+.restaurant__leftMiddleBottomSection,
+.restaurant__rightMiddleAndBottom {
+  height: 100%;
+}
+
+.restaurant__leftBottomSection {
+  padding-bottom: 4.5rem;
+}
+
+/* Restaurant left content middle section starts */
+.restaurant__leftMiddleSection {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.restaurant__leftMiddleSection::-webkit-scrollbar {
+  width: 6px;
+}
+
+.restaurant__leftMiddleSection::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 9999px;
+  outline: none;
+}
+
+.restaurant__leftMiddleSection > div > p:first-child {
+  width: 30%;
+  word-wrap: break-word;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.restaurant__productQuantity > p {
+  padding: 2px 10px;
+  user-select: none;
+}
+
+.restaurant__productQuantity > form > button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--dark-primary);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.restaurant__productQuantity > form > button:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.restaurant__productQuantity > form > button:active {
+  background-color: rgb(71, 70, 70);
+}
+
+.delete__restaurantProduct {
+  cursor: pointer;
+}
+
+.delete__restaurantProduct > button {
+  background-color: transparent;
+}
+/* Restaurant left content middle section ends */
+
+/* Restaurant left content bottom section starts */
+.restaurant__leftBottomSection {
+  background-color: var(--blue-second-primary);
+}
+
+.restaurant__leftBottomSection > div > h5,
+.restaurant__leftBottomSection > div > p {
+  margin-block-start: 0.3rem !important;
+  margin-block-end: 0.3rem !important;
+}
+
+.restaurant__cashButtons > a,
+.restaurant__addCustomerBtn,
+.restaurant__cashButtons > section {
+  width: 100%;
+}
+
+.restaurant__cashButtons > a > button,
+.restaurant__addCustomerBtn,
+.restaurant__cashButtons > section > button,
+.restaurant__modalBtn {
+  width: 100%;
+  height: 100%;
+  padding: 10px 25px;
+  border: 2px solid var(--dark-primary);
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  background: var(--dark-primary);
+  color: var(--white-primary);
+  z-index: 1;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.restaurant__cashButtons > a > button::after,
+.restaurant__addCustomerBtn::after,
+.restaurant__cashButtons > section > button::after,
+.restaurant__modalBtn::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background: var(--background-primary);
+  transition: all 0.3s ease;
+}
+
+.restaurant__cashButtons > a > button:hover,
+.restaurant__addCustomerBtn:hover,
+.restaurant__cashButtons > section > button:hover,
+.restaurant__modalBtn:hover {
+  color: var(--dark-primary) !important;
+}
+
+.restaurant__cashButtons > a > button:hover::after,
+.restaurant__addCustomerBtn:hover::after,
+.restaurant__cashButtons > section > button:hover::after,
+.restaurant__modalBtn:hover::after {
+  left: 0;
+  width: 100%;
+}
+
+.restaurant__cashButtons > a > button:active,
+.restaurant__addCustomerBtn:active,
+.restaurant__cashButtons > section > button:active,
+.restaurant__modalBtn:active {
+  top: 2px;
+}
+
+.restaurant__cashButtons > section > button {
+  background-color: var(--green-primary);
+  border: 2px solid var(--green-primary);
+}
+/* Restaurant left content bottom section ends */
+
+/* Restaurant left content ends */

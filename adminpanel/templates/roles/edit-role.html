@@ -1,0 +1,34 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="container create____roles___list mt-4"> <label class="fs-5">Set Role Title</label>
+        <div>
+            <div class="input-group mt-2">
+            <input type="text" class="form-control" name="role_title" value="{{ roleId.role_title }}" aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+            required>
+        </div>
+        </div>
+
+
+   
+        <div><input type="checkbox" name="is_admin" value="yes" {% if roleId.is_admin %}checked{% endif %}> Is Admin</div>
+            <div><input type="checkbox" name="can_config_pos" value="yes" {% if roleId.can_config_pos %}checked{% endif %}> Can Config POS</div>
+                <div><input type="checkbox" name="can_config_roles" value="yes" {% if roleId.can_config_roles %}checked{% endif %}> Can Config Roles</div>
+                    <div><input type="checkbox" name="can_config_orders" value="yes" {% if roleId.can_config_orders %}checked{% endif %}> Can Config orders</div>
+                        <div><input type="checkbox" name="can_config_inventory" value="yes" {% if roleId.can_config_inventory %}checked{% endif %}> Can Config Inventory</div>
+                            <div><input type="checkbox" name="can_config_customers" value="yes" {% if roleId.can_config_customers %}checked{% endif %}> Can Config Customers</div>
+                                <div><input type="checkbox" name="can_config_vendors" value="yes" {% if roleId.can_config_vendors %}checked{% endif %}> Can Config Vendors</div>
+                                    <div><input type="checkbox" name="can_config_tables" value="yes" {% if roleId.can_config_tables %}checked{% endif %}> Can Config Tables</div>
+                                        <div><input type="checkbox" name="can_config_emps" value="yes" {% if roleId.can_config_emps %}checked{% endif %}> Can Config Employees</div>
+                                            <div><input type="checkbox" name="can_manage_settings" value="yes" {% if roleId.can_manage_settings %}checked{% endif %}> Can Manage Settings</div>
+
+                                            <div class="d-flex justify-content-flex-start mt-4"><button class="edit___permission__btn" type="submit">SAVE</button></div>
+    </div>
+</form>

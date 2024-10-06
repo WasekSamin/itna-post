@@ -1,0 +1,90 @@
+{% extends "restaurant/base.html" %}
+{% load static %}
+{% load rest_custom_filter %}
+{% load mathfilters %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/restaurant/restaurantReceipt.css' %}" />
+
+<script src="{% static 'js/restaurant/restaurantReceipt.js' %}" defer></script>
+
+  <div class="container main____details">
+    <div class="main____________________details">
+      <p class="fw-bold main___font text-center">{{ order_details.shop }}</p>
+    <p class="text-center">{{ order_details.shop.shop_address1|safe }}</p>
+    <p class="text-center">{{ order_details.shop.shop_address2|safe }}</p>
+    <p class="text-center">Phone: {{ order_details.shop.shop_contact }}</p>
+    <p class="text-center">BIN: {{ order_details.shop.shop_bin_no }}</p>
+    <p class="text-center">VAT: {{ order_details.shop.shop_vat }}</p>
+    <p class="text-center">MUSHAK: {{ order_details.shop.mushak_no }}</p>
+    {% comment %} <p class="main___font">Paid</p> {% endcomment %}
+    <p class="text-center fw-bold">#####GUEST BILL#####</p>
+    <p class="">Time: {{ order_details.created_at }}</p>
+    <p class="">Ticket No: {{ order_details.id }}</p>
+    <p class="">Table No: {{ order_details.table.table_name }}</p>
+
+    </div>
+
+
+    <div class="nw____nw">
+      <div class="inner___nw">
+        <p>Qty</p>
+        <p>Item</p>
+      </div>
+      <div class="inner___nw">
+        <p>Price</p>
+        <p>T.Price</p>
+      </div>
+    </div>
+
+    {% for item in order_details.item_item.all %}
+      <div class="nw____nw">
+        <div class="inner___nw">
+          <p>{{ item.quantity }}</p>
+          <p>{{ item.items.item_name }}</p>
+        </div>
+        <div class="inner___nw">
+          <p>{{ shopId.currency.currency_icon }}{{ item.items.item_price }}</p>
+          <p>{{ shopId.currency.currency_icon }}{{ item.items.item_price|mul:item.quantity }}</p>
+        </div>
+      </div>
+    {% endfor %}
+
+    <div class="inner___nw">
+      <p class="fw-bold">Gross Total</p>
+      <p class="fw-bold">{{ shopId.currency.currency_icon }}{{ order_details.total }}</p>
+    </div>
+
+    <div class="inner___nw">
+      <p class="fw-bold">VAT {{ shopId.vat_amount }}%</p>
+      <p class="fw-bold">{{ shopId.currency.currency_icon }}{% with total=order_details.total vat_amount=shopId.vat_amount hundred=100 %}{{ total|mul:vat_amount|div:100 }}{% endwith %}</p>
+    </div>
+
+    <div class="inner___nw">
+      <p class="fw-bold">Total Payment</p>
+      <p class="fw-bold">{{ shopId.currency.currency_icon }}{{ order_details.grand_total }}</p>
+    </div>
+    <div class="inner___nw">
+      <p class="fw-bold">Payment:</p>
+    </div>
+    <div class="inner___nw">
+      <p class="fw-bold">Cash</p>
+      <p class="fw-bold">{{ shopId.currency.currency_icon }}{{ order_details.amount_received|add:order_details.change }}</p>
+    </div>
+    <div class="inner___nw">
+      <p >Total Payment</p>
+      <p>{{ shopId.currency.currency_icon }}{{ order_details.amount_received }}</p>
+    </div>
+    <div class="inner___nw">
+      <p >Refund Amount</p>
+      <p>{{ shopId.currency.currency_icon }}{{ order_details.amount_received|sub:order_details.grand_total }}</p>
+    </div>
+
+    <p class="text-center fw-bold  main___font mt-2">THANK YOU COME AGAIN</p>
+      <p class="text-center fw-bold border-bottom main___font">Powered By ITNA SOFT</p>
+    <button class="restaurant__printBtn mt-5 d-flex justify-content-center mx-auto align-items-center">Print</button>
+
+  </div>  
+
+{% endblock %}

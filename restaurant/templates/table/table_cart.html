@@ -1,0 +1,505 @@
+{% extends "restaurant/base.html" %}
+{% load static %}
+{% load table_filter %}
+{% load mathfilters %}
+
+{% block content %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/restaurant/openRestaurant.css' %}"
+/>
+<script src="{% static 'js/restaurant/moreDrop.js' %}" defer></script>
+
+
+{% include "restaurant/sidebar.html" %}
+
+<section class="restaurant__mainContent d-flex flex-wrap">
+  {% comment %}Restaurant left content starts{% endcomment %}
+{% load rest_custom_filter %}
+
+<link rel="stylesheet" href="{% static 'css/restaurant/openRestaurantLeftContent.css' %}" />
+<script src="{% static 'js/restaurant/openRestaurant.js' %}" defer></script>
+
+{% comment %}Restaurant left content top section starts{% endcomment %}
+{% comment %} Modal overlay {% endcomment %}
+<div id="restaurant__modalOverlay" class="w-100 h-100"></div>
+
+{% comment %} Restaurant cash modal section starts {% endcomment %}
+<div class="restaurant__cashModal">
+    <section class="card p-3">
+        <section id="close__restaurantModal">
+            <span class="iconify text-danger" data-icon="carbon:close-outline"></span>
+        </section>
+
+        <form method="POST" action="{% url 'tableValidation' tableId.id shopId.id  %}">
+          {% csrf_token %}
+
+          <input type="hidden" name="customer_id" id="get_customer_id" value="" />
+            <h4 class="fw-bold text-center text-muted border-bottom border-2 border-muted pb-2">Cash Payment</h4>
+
+            <div class="restaurant__modelTotalAmount">
+                <input type="hidden" id="restaurantTotalAmount" value="{% if cart_products2 %}{{ cart_products2|get_grand_total:request.session.cart2 }}{% else %}0{% endif %}" />
+                <h5 class="fw-bold">Total Amount: {{ shopId.currency.currency_icon }}{% if cart_products2 %}{% if shopId.vat_amount <= 0 %}{{ cart_products2|get_grand_total:request.session.cart2 }}{% else %}{% with total=cart_products2|get_grand_total:request.session.cart2 vat_amount=shopId.vat_amount hundred=100 %}
+                  {{ total|mul:vat_amount|div:hundred|add:total }}
+                {% endwith %}{% endif %}{% else %}0{% endif %}<span class="fs-6 text-danger">{% if shopId.vat_amount > 0 %}(Vat {{ shopId.vat_amount }}%){% endif %}</span><h5>
+            </div>
+
+            <div class="restaurant__amountReceived border-bottom border-muted pb-2">
+                <p class="my-1"><span class="fw-bold">Amount Received:</span> {{ shopId.currency.currency_icon }}<span class="fw-bold fs-4" id="amount_received"></span></p>
+                <p class="text-danger"><span class="fw-bold">Change: </span> {{ shopId.currency.currency_icon }}<span id="change">0</span> </p>
+            </div>
+
+
+            <div>
+                <label for="customer-name" class="form-label fw-bold mt-2">Customer Name</label>
+                <input autofocus="true" name="customer_name" type="text" class="d-block w-100 border border-1 border-muted" id="customer-name" placeholder="Customer Name..."  required />
+            </div>
+            <div>
+                <label for="customer-phone" class="form-label fw-bold mt-2">Customer Phone</label>
+                <input autofocus="true" name="customer_phone" type="number" class="d-block w-100 border border-1 border-muted" id="customer-phone" placeholder="Customer Phone..."  required />
+            </div>
+            <div>
+                <label for="received__cash" class="form-label fw-bold mt-2">Amount Received</label>
+                <input autofocus="true" name="amount_received" type="number" class="d-block w-100 border border-1 border-muted" id="received__cash" placeholder="Enter received amount..." onkeyup="cashOnekChash()" required />
+            </div>
+            <div class="my-1">
+                <label for="discount__cash" class="form-label fw-bold">Discount</label>
+                <section class="d-flex align-items-center border border-1 border-muted restaurant__cashDiscountField">
+                    <input type="number" name="discount" id="discount__cash" value="0" min="0" placeholder="Enter discount amount" required />
+                    <span class="iconify ms-2 text-muted" data-icon="akar-icons:percentage"></span>
+                </section>
+            </div>
+
+            {% comment %} <div>
+              <label for="restaurant__paymentMethod" class="fw-bold my-1">Payment Method</label>
+              <div class="d-flex flex-column cash__paymentMethod">
+                <section class="form-check">
+                  <div>
+                    <input class="form-check-input" type="radio" name="payment__method" id="cash" checked>
+                    <label class="form-check-label" for="cash">
+                      Cash
+                    </label>
+                  </div>
+                </section>
+                <section class="form-check">
+                  <input class="form-check-input" type="radio" name="payment__method" id="restaurant__creditCardPaymentInput">
+                  <label class="form-check-label" for="restaurant__creditCardPaymentInput">
+                    Credit Card
+                  </label>
+                  <div id="restaurant__creditCardField">
+                    <input name="credit_card_number" class="form-control" type="text" placeholder="Credit card account number..." />
+                  </div>
+                </section>
+                <section class="form-check">
+                  <input class="form-check-input" type="radio" name="payment__method" id="restaurant__bkashPaymentInput">
+                  <label class="form-check-label" for="restaurant__bkashPaymentInput">
+                    bKash
+                  </label>
+                  <div id="restaurant__bkashField">
+                    <input class="form-control" type="text" name="bkash_number" placeholder="bKash number..." />
+                  </div>
+                </section>
+                <section class="form-check">
+                  <input class="form-check-input" type="radio" name="payment__method" id="restaurant__nagadPaymentInput">
+                  <label class="form-check-label" for="restaurant__nagadPaymentInput">
+                    Nagad
+                  </label>
+                  <div id="restaurant__nagadfield">
+                    <input name="nagad_number" class="form-control" type="text" placeholder="Nagad number..." />
+                  </div>
+                </section>
+              </div>
+            </div> {% endcomment %}
+
+            <div class="mt-3">
+                <button type="submit" class="restaurant__modalBtn text-white">Save</button>
+            </div>
+        </form>
+    </section>
+</div>
+{% comment %} Restaurant cash modal section ends {% endcomment %}
+
+<div class="restaurant__leftContent bg-white">
+  <div
+    class="
+      restaurant__leftNavbar
+      d-flex
+      justify-content-between
+      align-items-center
+      px-2
+      w-100
+    "
+  >
+    <div class="d-flex align-items-center">
+      <section class="restaurant__hamburgerMenu">
+        <span class="iconify" data-icon="ci:menu-alt-05"></span>
+      </section>
+
+      <section class="restaurant__walkIn ms-4">
+        <p class="text-white fw-bold" id="getCustomerWalkIn">
+          Walk-In
+          <span class="iconify" data-icon="akar-icons:chevron-down"></span>
+        </p>
+
+        <input type="hidden" value="walk_in" id="get_customer" />
+
+        <div class="restaurant__CustomerList bg-white">
+          <section class="restaurant__customerListContent w-100 h-100 bg-white">
+            <div
+              class="
+                d-flex
+                justify-content-between
+                align-items-center
+                border-bottom border-muted
+                pt-1
+                pb-2
+              "
+              onclick="selectWalkIn(this)"
+            >
+              <section class="d-flex flex-column w-100">
+                <p class="fw-bold restaurant__searchUsernameText">Walk In</p>
+              </section>
+
+              <section>
+                <span
+                  class="iconify"
+                  data-icon="ant-design:right-outlined"
+                ></span>
+              </section>
+            </div>
+
+            {% if customers|length > 0 %}
+              {% for customer in customers %}
+                <div
+                  class="
+                    d-flex
+                    justify-content-between
+                    align-items-center
+                    border-bottom border-muted
+                    pt-1
+                    pb-2
+                  "
+                  id="customer-{{ customer.id }}-{{ customer.customer_name }}"
+                  onclick="selectedCustomer(this)"
+                >
+                  <section class="d-flex flex-column w-100">
+                    <p class="fw-bold restaurant__searchUsernameText">
+                      {{ customer.customer_name }}
+                    </p>
+                    <small class="text-muted">{{ customer.customer_contact }}</small>
+                  </section>
+
+                  <section>
+                    <span
+                      class="iconify"
+                      data-icon="ant-design:right-outlined"
+                    ></span>
+                  </section>
+                </div>
+              {% endfor %}
+            {% endif %}
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <section class="restaurant__clearUser d-flex align-items-center">
+      <div onclick="selectWalkIn(this)">
+        <span
+          class="iconify"
+          data-icon="fa-solid:trash-alt"
+          style="color: white"
+        ></span>
+      </div>
+      <div id="restaurant__addNewCustomer" class="text-white ms-3 mt-1">
+        <span class="iconify" data-icon="akar-icons:plus"></span> Add New
+        Customer
+
+        <section id="restaurant__addNewCustomerForm">
+          <div class="card p-3">
+            {% for message in messages %}
+              <p class="fw-bold text-center text-danger">{{ message }}</p>
+            {% endfor %}
+            <form method="POST" action="{% url 'addingNewCustomer' shopId.id %}">
+              {% csrf_token %}
+              <section>
+                <label class="form-label text-dark fw-bold" for="cust_name"
+                  >Customer Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cust_name"
+                  placeholder="Customer name..."
+                  name="customer_name"
+                />
+              </section>
+              <section class="my-1">
+                <label for="cust_contact" class="form-label text-dark fw-bold"
+                  >Customer Contact No.</label
+                >
+                <input
+                  id="cust_contact"
+                  type="number"
+                  class="form-control"
+                  placeholder="Customer contact no..."
+                  name="customer_contact"
+                />
+              </section>
+              <section>
+                <label for="cust_email" class="form-label text-dark fw-bold"
+                  >Customer Email</label
+                >
+                <input
+                  id="cust_email"
+                  type="email"
+                  class="form-control"
+                  placeholder="Customer email..."
+                  name="customer_email"
+                />
+              </section>
+              <section class="my-1">
+                <label for="cust_address" class="form-label text-dark fw-bold"
+                  >Customer Address</label
+                >
+                <textarea
+                  id="cust_address"
+                  type="text"
+                  class="form-control"
+                  placeholder="Customer address..."
+                  name="customer_add"
+                ></textarea>
+              </section>
+
+              <section class="mt-3">
+                <button class="restaurant__addCustomerBtn" type="submit">
+                  Add Customer
+                </button>
+              </section>
+            </form>
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+  {% comment %}Restaurant left content top section ends{% endcomment %}
+
+  <div
+    class="
+      d-flex
+      flex-column
+      justify-content-between
+      restaurant__leftMiddleBottomSection
+    "
+  >
+    {% comment %}Restaurant left content middle section starts{% endcomment %}
+    <section class="restaurant__leftMiddleSection pt-4 px-2">
+      {% if cart_products2 %}
+        {% for c in cart_products2 %}
+        <div
+          class="
+            d-flex
+            justify-content-between
+            border-bottom border-muted border-2
+            mb-2
+          "
+        >
+          <p class="fw-bold">{{ c.item_name }}</p>
+          <section class="d-flex flex-column">
+            <div
+              class="
+                restaurant__productQuantity
+                d-flex
+                justify-content-center
+                align-items-center
+              "
+            >
+              <form method="POST" action="">
+                {% csrf_token %}
+                <input hidden type="text" name="item_id" value="{{ c.id }}">
+                <button
+                  class="
+                    fs-5
+                    d-flex
+                    justify-content-center
+                    align-items-center
+                    fw-bold
+                    text-white
+                  "
+                >
+                  +
+                </button>
+              </form>
+              <p class="mx-1 border border-dark">{{ c|cart_quantity:request.session.cart2 }}</p>
+              <form method="POST" action="">
+                {% csrf_token %}
+                <input hidden type="text" name="item_id" value="{{c.id}}" />
+                <input hidden type="number" name="remove" value="-1" />
+                <button
+                  class="
+                    fs-5
+                    d-flex
+                    justify-content-center
+                    align-items-center
+                    fw-bold
+                    text-white
+                  "
+                >
+                  -
+                </button>
+              </form>
+            </div>
+
+            <p class="text-muted text-center mt-1">{{ shopId.currency.currency_icon }}{{ c.item_price }}</p>
+          </section>
+
+          <section>
+            <h5 class="fw-bold">{{ shopId.currency.currency_icon }} {{c|cart_total:request.session.cart2 }}</h5>
+          </section>
+
+          <form method="POST" action="{% url 'delete-product' shopId.id c.id  %}">
+            {% csrf_token %}
+            {% comment %} <input hidden type="text" name="remove" value="{{cart_products.id}}"/> {% endcomment %}
+            {% comment %} <input hidden type="number" name="remove" value="-1" /> {% endcomment %}
+            <section class="delete__restaurantProduct">
+              <button type="submit" style="border: none;">
+                <span
+                class="iconify text-danger fs-5"
+                data-icon="carbon:close-outline"
+              ></span>
+              </button>
+            </section>
+          </form>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="text-center">
+          <h5 class="text-danger fw-bold m-auto">No product is added!</h5>
+        </div>
+      {% endif %}
+    </section>
+    {% comment %}Restaurant left content middle section ends{% endcomment %} 
+    {% comment %}Restaurant left content bottom section starts{% endcomment %}
+    <section class="restaurant__leftBottomSection w-100 pt-2 px-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="fw-bold text-muted">Subtotal</p>
+        <p>{{ shopId.currency.currency_icon }}{% if cart_products2 %}{{ cart_products2|get_grand_total:request.session.cart2 }}{% else %}0{% endif %}</p>
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="fw-bold text-muted">Discount</p>
+        <p>{{ shopId.currency.currency_icon }}0</p>
+      </div>
+      <div
+        class="
+          d-flex
+          justify-content-between
+          align-items-center
+          border-top border-1 border-primary
+          pt-1
+        "
+      >
+        <h5 class="fw-bold">Total</h5>
+        <p class="fw-bold">{{ shopId.currency.currency_icon }}{% if cart_products2 %}{{ cart_products2|get_grand_total:request.session.cart2 }}{% else %}0{% endif %}</p>
+      </div>
+      <div class="d-flex restaurant__cashButtons my-2">
+        <a href="{% url 'get_table_orders' shopId.id%}">
+          <button class="p-3 text-white">All Table Orders</button>
+        </a>
+        <section>
+          <button class="p-3 text-white restaurant__cashButton">Cash</button>
+        </section>
+      </div>
+    </section>
+    {% comment %}Restaurant left content bottom section ends{% endcomment %}
+  </div>
+</div>
+
+
+
+
+  {% comment %}Restaurant left content ends{% endcomment %}
+
+  {% comment %}Restaurant right content starts{% endcomment %}
+  <div class="restaurant__rightContent">
+      {% comment %} Restaurant right navbar section starts{% endcomment %}
+      <section class="restaurant__rightNavbar px-2 d-flex justify-content-end">
+        <div class="restaurant__productSearchField bg-white d-flex align-items-center">
+            <span class="iconify text-muted" data-icon="ant-design:search-outlined"></span>
+            <input onkeyup="matchName(this)" class="w-100" type="search" placeholder="Search By Category..." >
+        </div>
+      </section>
+      {% comment %} Restaurant right navbar section starts{% endcomment %}
+
+        <div class="d-flex flex-column justify-content-between restaurant__rightMiddleAndBottom">
+            {% comment %}Restaurant right content middle section starts{% endcomment %}
+            <section class="restaurant__rightMiddleContent">
+                {% comment %} LOOP {% endcomment %}
+                {% for c in category %}
+                {% if c.item_set.all|length > 0 %}
+                    <div class="restaurant__rightCategorySection border-bottom border-muted pb-2 my-2 mx-2">
+                        <h5 class="fw-bold mb-3 restaurant__catName">{{ c.category_name }}</h5>
+                        
+                        <section class="d-flex flex-wrap restaurant__categoryProductSection">
+                            {% for i in c.item_set.all %}
+                            <form method="POST" class="restaurant__categoryProductForm" action="">
+                                {% csrf_token %}
+                                <input hidden type="text" name="item_id" value="{{ i.id }}">
+                                <button class="card restaurant__rightProductCard p-0 {% if not i.item_img %}noImageCard{% endif %}">
+                                    <section class="restaurant__rightCatProduct w-100">
+                                      {% if i.item_img %}
+                                        <div class="restaurant__rightCatProdutImg">
+                                            <img src="{{ i.item_img.url }}" alt="">
+                                        </div>
+                                      {% endif %}
+                                        <div class="px-1">
+                                            <p>{{ shopId.currency.currency_icon }}{{ i.item_price }}</p>
+                                        </div>
+                                    </section>
+
+                                    <section class="px-2 {% if not i.item_img %}no__imageCardName{% endif %}">
+                                        <p class="fw-bold get__restaurantProductName">{{ i.item_name }}</p>
+                                    </section>
+                                </button>
+                            </form>
+                            {% endfor %}
+
+                            {% comment %}Extra{% endcomment %}
+                        
+                        </section>
+                    </div>
+                {% endif %}
+                {% endfor %}
+
+                {% comment %}Extra{% endcomment %}
+          
+               
+                
+
+            </section>
+            {% comment %}Restaurant right content middle section ends{% endcomment %}
+
+            {% comment %}Restaurant right content bottom section starts{% endcomment %}
+            <section class="justify-content-end">
+              <div class="drop____down___btn" >
+                <div class="innerDrop" id="advanceBtn">
+                       <ul>
+                        <li class="dropdown_____list p-2"> <a href="{% url 'AdvanceBooking' shopId.id %}" class="text-dark fw-bold" >Advance</a></li>
+                        <li class="p-1">
+                            <a href="{% url 'get_table_orders' shopId.id  %}" class="text-dark fw-bold">Table Orders</a>
+                        </li>
+                       </ul>
+                   
+                </div>
+                </div>
+                <div class="d-flex restaurant__rightBottom">
+                    <a class="fw-bold text-dark border border-muted p-3 text-center bg-white" href="{% url 'due-restaurant' shopId.id%}">Due</a>
+                    <a class="fw-bold text-dark border border-muted p-3 text-center bg-white" href="{% url 'restaurant-all-payments' shopId.id %}">Refund</a>
+                    <button class="fw-bold border border-muted bg-white" id="more_____btn" onclick="dropdown(this)">More <span class="iconify" data-icon="entypo:dots-three-vertical"></span></button>
+                </div>
+            </section>
+            {% comment %}Restaurant right content bottom section ends{% endcomment %}
+        </div>
+  </div>
+  {% comment %}Restaurant right content ends{% endcomment %}
+</section>
+{% endblock %}

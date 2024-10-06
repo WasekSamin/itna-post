@@ -1,0 +1,117 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}">
+
+<script src="{% static 'js/admin-panel/adminpanelOrders.js' %}" defer></script>
+
+<!-- search content start -->
+<div class="main____search________content">
+  <div class="search_____content me-1 mt-2">
+    <form>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search here....."
+          aria-label=""
+          aria-describedby="basic-addon1"
+          onkeyup="matchName(this)"
+        />
+        <div class="input-group-prepend">
+          <button class="btn search_____btn" type="button">
+            Search
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div>
+    <div class="dropdown me-1 mt-2">
+        <form method="POST" action="{% url 'export-order-data' shop_id.id %}">{% csrf_token %}
+          <button class="search_________btn" type="submit">
+              <span class="iconify" data-icon="bx:bx-export"></span> Export
+          </button>
+        </form>
+      </div>
+  </div>
+</div>
+<!-- search content end -->
+
+<!-- order status start -->
+<div class="order_____status">
+  <h5 class="fw-bold">Order Status: </h5>
+  <form method="GET" class="d-flex">
+    <select class="form-select me-1 main____select" aria-label="Default select example" name="order_type">
+      <option value="all" {% if order_type is None or order_type == "all" %}selected{% endif %}>All</option>
+      <option value="paid" {% if order_type == "paid" %}selected{% endif %}>Paid</option>
+      <option value="unpaid" {% if order_type == "unpaid" %}selected{% endif %}>Unpaid</option>
+    </select>
+    <button type="submit" class="text-center" id="filter__btn">Filter</button>
+  </form>
+</div>
+<!-- order status end -->
+
+
+<!-- orders table start -->
+<div class="main____table table-responsive">
+  <table class="table">
+    <thead class="table_____head">
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">Order Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Total Sales</th>
+        
+        <th scope="col">Sold By</th>
+        <th scope="col">Customer</th>
+      </tr>
+    </thead>
+    <tbody class="admin__orderTable">
+      {% if orders %}
+      {% for o in orders %}
+      <tr>
+        <td class="fw-bold">
+          <a href="{% url 'restaurant-order-details' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+          {{ o.id }}
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'restaurant-order-details' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+          {{ o.created_at }}
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'restaurant-order-details' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+          {{ o.status }}
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'restaurant-order-details' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+          {{ shop_id.currency.currency_icon }}{{ o.grand_total }}
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'restaurant-order-details' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+          {{ o.shop.user.username }}
+          </a>
+        </td>
+        <td>
+          {% if o.customer %}
+          <a href="{% url 'restaurant-order-details' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+          {{ o.customer.customer_name }}
+          </a>
+          {% else %}
+          <a href="{% url 'restaurant-order-details' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+            Walk-In
+            </a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <h3>No Orders Found!</h3>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+<!-- orders table end -->

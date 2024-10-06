@@ -1,0 +1,81 @@
+.restaurant__leftMiddleBottomSection {
+  display: none !important;
+}
+.restaurant__walkIn,
+.restaurant__clearUser,
+.restaurant__productSearchField,
+.restaurant__rightBottom {
+  display: none !important;
+}
+.restaurant__rightNavbar {
+  padding-top: 2.8rem !important;
+}
+.restaurant__rightContent {
+  position: absolute;
+  left: 0;
+  top: 10%;
+}
+
+.table____left___message {
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10vh;
+  height: calc(100vh - 10vh);
+  width: 40%;
+}
+
+/* table start */
+.table____div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  height: auto;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 6px;
+  height: 10rem;
+}
+.table____div p {
+  text-align: center;
+}
+.main____table____div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* not found table */
+.not____found___table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.not____found___table img {
+  width: 450px;
+  height: 450px;
+  object-fit: cover;
+}
+
+@media (max-width: 1115px) {
+  .table____div {
+    width: 20%;
+  }
+}
+@media (max-width: 750px) {
+  .table____div {
+    width: 25%;
+  }
+}
+@media (max-width: 550px) {
+  .table____div {
+    width: 30%;
+  }
+}
+@media (max-width: 450px) {
+  .table____div {
+    width: 100%;
+  }
+}

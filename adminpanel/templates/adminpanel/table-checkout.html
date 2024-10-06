@@ -1,0 +1,108 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}">
+
+<script src="{% static 'js/admin-panel/adminpanelTableOrders.js' %}" defer></script>
+
+<!-- search content start -->
+<div class="main____search________content">
+    <div class="search_____content me-1 mt-2">
+      <form>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here....."
+            aria-label=""
+            aria-describedby="basic-addon1"
+            onkeyup="matchName(this)"
+          />
+          <div class="input-group-prepend">
+            <button class="btn search_____btn" type="button">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div>
+      <div class="dropdown me-1 mt-2">
+          <form method="POST" action="{% url 'export-table-checkout-data' shop_id.id %}">{% csrf_token %}
+            <button class="search_________btn" type="submit">
+                <span class="iconify" data-icon="bx:bx-export"></span> Export
+            </button>
+          </form>
+        </div>
+    </div>
+  </div>
+  <!-- search content end -->
+
+<div class="main____table table-responsive">
+    <table class="table">
+      <thead class="table_____head">
+        <tr>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Customer Phone</th>
+          <th scope="col">Table</th>
+          <th scope="col">Status</th>
+          <th scope="col">Amount Received</th>
+          <th scope="col">Change</th>
+          <th scope="col">Total</th>
+          <th scope="col">Shop Name</th>
+        </tr>
+      </thead>
+      <tbody class="admin__orderTable">
+        {% if orders %}
+        {% for o in orders %}
+        <tr>
+          <td class="fw-bold">
+            <a href="{% url 'get_table_receipt' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+              {{ o.customer_name }}
+            </a>
+          </td>
+        
+          <td>
+            <a href="{% url 'get_table_receipt' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+              {{ o.customer_phone }}
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'get_table_receipt' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+              {{ o.table.table_name }}
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'get_table_receipt' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+              {{ o.table_status }}
+            </a>
+          </td>
+          <td>
+    
+            <a href="{% url 'get_table_receipt' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+               {{ shop_id.currency.currency_icon }}{{ o.amount_received }}
+            </a>
+        </td>
+        <td>
+    
+            <a href="{% url 'get_table_receipt' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+               {{ shop_id.currency.currency_icon }}{{ o.change }}
+            </a>
+        </td>
+        <td>
+    
+            <a href="{% url 'get_table_receipt' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+               {{ shop_id.currency.currency_icon }}{{ o.grand_total }}
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'get_table_receipt' shop_id.id o.id %}" class="text-dark text-decoration-none w-100 d-flex">
+                {{ o.shop.shop_name }}
+              </a>
+         
+          </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>

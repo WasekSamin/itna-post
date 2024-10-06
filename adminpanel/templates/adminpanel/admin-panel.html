@@ -1,0 +1,105 @@
+{% load static %}
+{% include 'adminpanel/sidebar.html' %}
+
+
+
+
+<!-- main content start -->
+<div class="main_____content">
+
+    <!-- stats start -->
+    <div class="main____stat">
+      <!-- individual stat start -->
+      <div class="d-flex flex-wrap justify-content-center align-items-center">
+      <div class="indi_____stat">
+        <div>
+          <p class="first____part"><span class="iconify icon" data-icon="ant-design:user-add-outlined"></span></p>
+        </div>
+        <div class="ms-2">
+          <p class="fw-bold">New Customers</p>
+          <p>{{ customer_amount }}</p>
+        </div>
+      </div>
+      <!-- individual stat end -->
+      <!--extra individual stat start -->
+      <div class="indi_____stat">
+        <div>
+          <p class="first____part"><span class="iconify icon" data-icon="fontisto:shopping-sale"></span></p>
+        </div>
+        <div class="ms-2">
+          <p class="fw-bold">Gross Sales</p>
+          <p>{{ shop_id.currency.currency_icon }} {{gs_sale|floatformat:2}}</p>
+        </div>
+      </div>
+      <div class="indi_____stat">
+        <div>
+          <p class="first____part"><span class="iconify icon"  data-icon="emojione-v1:money-with-wings"></span></p>
+        </div>
+        <div class="ms-2">
+          <p class="fw-bold">Total Transactions</p>
+          <p>{{ shop_id.currency.currency_icon }} {{ pipi|floatformat:2 }}</p>
+        </div>
+      </div>
+      <div class="indi_____stat">
+        <div>
+          <p class="first____part"><span class="iconify icon" data-icon="ant-design:dollar-circle-outlined"></span></p>
+        </div>
+        <div class="ms-2">
+          <p class="fw-bold">Refunds</p>
+          <p>Coming Soon</p>
+        </div>
+      </div>
+    </div>
+      <!--extra individual stat end -->
+
+      <div class="order_____status d-flex align-items-end flex-column">
+        <h5 class="fw-bold">Year: </h5>
+        <form method="GET" class="d-flex">
+          <select class="form-select w-100 me-1 main____select" aria-label="Default select example" name="filtered_year">
+            <option value="all" {% if year_type is None or year_type == "all" %}selected{% endif %}>All</option>
+            {% for year in filtering_years %}
+            <option value="{{ year }}" {% if year_type is not None and year_type == year %}selected{% endif %}>{{ year }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit" id="filter__btn" class="filter__btnClass">Filter</button>
+        </form>
+      </div>
+    </div>
+    <!-- stats end -->
+
+    <!-- order status start -->
+    {% comment %} <div class="container">
+      
+    </div> {% endcomment %}
+<!-- order status end -->
+
+    <!-- chart div start -->
+    <div class="main_____chart____div">
+      <!-- individual chart start -->
+      <div class="card p-3 m-1 indi_____chart">
+        <h2 class="text-center fw-bold fs-4">New Customers of {{ current_year }}</h2>
+        <input type="hidden" value="{{ customer_unqiue_month_count }}" id="customer_chart" />
+        <canvas id="myChart1"></canvas>
+      </div>
+      {% comment %} <div class="card p-3 m-1 indi_____chart">
+        <h2 class="text-center fw-bold fs-4">Gross Sales of {{ current_year }}</h2>
+        <canvas id="myChart2"></canvas>
+      </div> {% endcomment %}
+      <div class="card p-3 m-1 indi_____chart">
+        <h2 class="text-center fw-bold fs-4">Total Transactions of {{ current_year }}</h2>
+        <input type="hidden" value="{{ transaction_unqiue_month_count }}" id="transaction_chart" />
+        <canvas id="myChart3"></canvas>
+      </div>
+      <!-- individual chart end -->
+
+    </div>
+    <!-- chart div end -->
+
+
+
+  </div>
+  <!-- main content end -->
+<!-- chart js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
+<script src="{% static 'js/admin-panel/admin-panel.js' %}"></script>

@@ -1,0 +1,71 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+<script src="{% static 'js/admin-panel/vendorHome.js' %}" defer></script>
+
+<!-- search content start -->
+<div class="main____search________content">
+    <div class="search_____content me-1 mt-2">
+      <form>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here....."
+            aria-label=""
+            aria-describedby="basic-addon1"
+            onkeyup="matchName(this)"
+          />
+          <div class="input-group-prepend">
+            <button class="btn search_____btn" type="button">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="me-1 mt-2">
+      <a href="{% url 'create-vendor' shop_id.id %}" type="button" class="btn new____vendor">New Vendor</a>
+    </div>
+  </div>
+  <!-- search content end -->
+
+  <!-- department table start -->
+<div class="main____dept____table table-responsive">
+    <table class="table">
+      <thead class="table_____head">
+        <tr>
+          <th scope="col">
+            <div class="form-check">
+            </div>
+          </th>
+          <th scope="col">Vendor Name</th>
+          <th scope="col">Tax ID</th>
+          <th scope="col">Shop Name</th>
+        </tr>
+      </thead>
+      <tbody class="vendor__table">
+        {% if vendors %}
+        {% for v in vendors %}
+        <tr>
+          <th scope="row">
+          </th>
+          <td><a href="{% url 'edit-vendor' v.shop.id v.id %}" class="w-100 d-flex text-dark">{{ v.vendor_name }}</a></td>
+          <td><a href="{% url 'edit-vendor' v.shop.id v.id %}" class="w-100 d-flex text-dark">{{ v.tax_id }}</a></td>
+          <td class="d-flex align-items-center">
+            <a href="{% url 'edit-vendor' v.shop.id v.id %}" class="w-100 d-flex text-dark">{{ v.shop.shop_name }}</a>
+            <form method="POST" action="{% url 'delete-vendor' v.shop.id v.id %}">{% csrf_token %}
+              <button type="submit" class="border-0" style="background-color: transparent;"><span
+                  class="iconify cross___icon"
+                  data-icon="emojione:cross-mark"
+                ></span></button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+        {% else %}{% endif %}
+ 
+      </tbody>
+    </table>
+  </div>
+  <!-- department table end -->

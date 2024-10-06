@@ -1,0 +1,99 @@
+{% extends "restaurant/base.html" %} {% load static %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/restaurant/closeReg.css' %}" />
+{% include "restaurant/sidebar.html" %} {% comment %} top nav {% endcomment %}
+
+<div class="top___nav">
+  <div class="restaurant__hamburgerMenu">
+    <span class="iconify" data-icon="ci:menu-alt-05"></span>
+  </div>
+  <div class="open___reg">
+    <p class="text-white fs-5 fw-bold">Open Register</p>
+  </div>
+  <div>
+    <p>
+      <span
+        class="iconify icon___trans"
+        data-icon="ant-design:menu-outlined"
+      ></span>
+    </p>
+  </div>
+</div>
+
+<div class="main_____content">
+  <div class="left______side">
+    <div class="divOne">
+      <div class="left___div">
+        <p class="fw-bold">Opened:</p>
+        <p class="text-muted">11/11/1111 15:11:52</p>
+        <p class="fw-bold">By Employee:</p>
+        <p class="text-muted">Goku Samin</p>
+      </div>
+      <div class="left___div">
+        <p class="fw-bold">Closed:</p>
+        <p class="text-muted">11/11/1111 15:11:52</p>
+        <p class="fw-bold">By Employee:</p>
+        <p class="text-muted">Goku wasek</p>
+      </div>
+    </div>
+    <hr />
+    <div class="left______middle____content">
+      <div class="left______middle">
+        <p>Opening amount</p>
+        <p>$55.55</p>
+      </div>
+
+      <div class="left______middle">
+        <p>Cash Sales</p>
+        <p>$2,267.44</p>
+      </div>
+
+      <div class="left______middle">
+        <p>Refunds</p>
+        <p>$0.00</p>
+      </div>
+
+      <div class="left______middle">
+        <p>Payins</p>
+        <p>$0.00</p>
+      </div>
+
+      <div class="left______middle">
+        <p>Payouts</p>
+        <p>$0.00</p>
+      </div>
+
+      <div class="left______middle">
+        <p>Closing amount</p>
+        <p>$0.00</p>
+      </div>
+
+      <div class="left______middle">
+        <p class="fw-bold">VARIANCE</p>
+        <p class="fw-bold">($2,322.99)</p>
+      </div>
+
+    </div>
+
+    <section class="print___btn">
+      <a href="#" type="submit" class="text-uppercase package__buyBtn text-center">Print <span class="iconify" data-icon="el:print" data-width="20"></span></a>
+  </section>
+
+  </div>
+  <div class="right______side">
+    <form>
+      <div class="amount___input mt-2">
+        <label for="open_amount" class="fw-bold">Opening Amount:</label>
+        <input type="number" class="border border-1 border-muted mt-2" id="open_amount" name="amount" placeholder="Type opening amount here.." required>
+      </div>
+
+      <div>
+        <section class="open___btn">
+          <a href="#" type="submit" class="text-uppercase package__buyBtn open______reg___btn text-center">Open Register <span class="iconify" data-icon="bx:bx-lock-open-alt" data-width="20"></span></a>
+      </section>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

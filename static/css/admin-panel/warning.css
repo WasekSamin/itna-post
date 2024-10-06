@@ -1,0 +1,34 @@
+.main____warning p{
+    margin-block-end: 0;
+    margin-block-start: 0;
+    text-align: center;
+}
+.warning_icon{
+    font-size: 60px;
+}
+.main____warning{
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 34%;
+    margin: 0 auto;
+    padding: 33px;
+}
+.main____warning a{
+    text-decoration: none;
+    color: #fff;
+    background-color: #c93328;
+    border-radius: 5px;
+    padding: 8px;
+}
+.icon____logo{
+    background-color: #c93328;
+    color: #fff;
+    padding: 7px;
+    border-radius: 5px;
+}
+.main___div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

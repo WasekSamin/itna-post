@@ -1,0 +1,74 @@
+{% extends "restaurant/base.html" %}
+
+{% load static %}
+{% load rest_custom_filter %}
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="{% static 'css/restaurant/openRestaurantDue.css' %}" />
+
+<script src="{% static 'js/restaurant/openRestaurantDue.js' %}" defer></script>
+
+{% include "restaurant/sidebar.html" %}
+
+<section class="restaurant__mainContent d-flex flex-wrap">
+    {% comment %} Open restaurant left section starts {% endcomment %}
+    {% include "restaurant/openRestaurantLeftContent.html" %}
+    {% comment %} Open restaurant left section ends {% endcomment %}
+
+    {% comment %} Open restaurant save right section starts {% endcomment %}
+    <div class="restaurant__rightContent d-flex flex-column align-items-center">
+        <section class="restaurant__rightTopNavbar"></section>
+
+        <input type="hidden" id="goBackToHome" value="{{ shopId.id }}" />
+
+        <section id="restaurant__bottomSection" class="d-flex flex-column align-items-center">
+            <div class="mt-5 mb-5">
+                <p class="text-muted fw-bold">Amount Due</p>
+                <h4 class="text-primary fw-bold">{{ shopId.currency.currency_icon }}{% if cart_products %}{{ cart_products|get_grand_total:request.session.cart1 }}{% else %}0{% endif %}</h4>
+            </div>
+
+            <div class="">
+                <form method="POST" id="restaurant__dueOrderForm">
+                    {% csrf_token %}
+                    <section class="card p-3 d-flex flex-column justify-content-center">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <label for="order_note" class="fw-bold me-2">Select User</label>
+                            <select class="bg-white border border-muted" id="restaurant__selectUser" name="selected_due_user">
+                                {% for customer in customers %}
+                                    <option value="{{ customer.id }}">{{ customer.customer_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            {% comment %} <label for="order_note" class="fw-bold me-2">Due Total</label> {% endcomment %}
+                            <input hidden type="number" name="due_total" value="{% if cart_products %}{{ cart_products|get_grand_total:request.session.cart1 }}{% else %}0{% endif %}">
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between">
+                            <label for="order_note" class="fw-bold me-2">Order Note</label>
+                            <textarea rows="2" name="order_note" placeholder="Type order note..." autofocus="true" type="text" class="border border-muted restaurant__dueInputSize"></textarea>
+                        </div>
+                        <div class="my-2 d-flex align-items-center justify-content-between">
+                            <label for="order_note" class="fw-bold me-2">Customer Due Submission Date</label>
+                            <div class="d-flex align-items-center border border-muted restaurant__calendar">
+                                <input name="order_submission_due_date" id="calendar" value="" placeholder="mm/dd/YYYY" class="" autocomplete="off" required name="submission_date" />
+                                <span class="iconify text-muted" data-icon="bi:calendar-check"></span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="restaurant__saveDueBtnSection">
+                        <button type="submit" class="text-white">Save Due</button>
+                        <button type="submit" class="text-white ms-2">Print Bill</button>
+                    </section>
+                </form>
+            </div>
+        </section>
+    </div>
+    {% comment %} Open restaurant save right section ends {% endcomment %}
+</section>
+
+{% endblock %}

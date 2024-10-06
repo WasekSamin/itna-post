@@ -1,0 +1,146 @@
+/* Restaurant right content starts */
+.restaurant__rightContent {
+  position: fixed;
+  top: 0;
+  left: 40%;
+  width: 60%;
+  height: 100%;
+}
+
+/* Restaurant right navbar section starts */
+.restaurant__rightNavbar {
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  background-color: var(--blue-primary);
+}
+
+.restaurant__productSearchField {
+  width: 20rem;
+  border-radius: 5px;
+  padding: 3px 6px;
+}
+
+.restaurant__productSearchField > input {
+  outline: none;
+  border: none;
+}
+
+.restaurant__productSearchField > svg {
+  font-size: 1.5rem;
+}
+/* Restaurant right navbar section starts */
+
+/* Restaurant right content middle section starts */
+.restaurant__rightProductCard {
+  width: 8rem;
+}
+
+.restaurant__rightProductCard.noImageCard {
+  width: 8rem;
+  height: 5.65rem;
+}
+
+.restaurant__rightProductCard.noImageCard .no__imageCardName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  word-break: break-all;
+  margin-top: 1rem;
+}
+
+.restaurant__categoryProductSection {
+  gap: 0.5rem;
+}
+
+.restaurant__categoryProductForm {
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.restaurant__categoryProductForm:hover {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.restaurant__rightCatProduct {
+  position: relative;
+}
+
+.restaurant__rightCatProduct > div:last-child {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.restaurant__rightCatProdutImg {
+  width: 100%;
+  height: 3rem;
+}
+
+.restaurant__rightCatProdutImg > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.restaurant__rightMiddleContent {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+/* Restaurant right content middle section ends */
+
+/* Restaurant right content bottom section starts */
+.drop____down___btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.admin____overlay {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+.admin____overlay.show__adminOverlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.innerDrop {
+  width: 22.5%;
+  background: #fff;
+  text-align: center;
+}
+.dropdown_____list {
+  border-bottom: 2px solid #000;
+}
+.innerDrop ul {
+  padding: 0;
+  width: 100%;
+}
+.restaurant__rightBottom {
+  padding-bottom: 3.5rem;
+  position: relative;
+}
+
+.restaurant__rightBottom > a,
+.restaurant__rightBottom > button {
+  flex: 1;
+}
+
+.restaurant__rightBottom > a:active,
+.restaurant__rightBottom > button:active {
+  background-color: var(--background-primary) !important;
+}
+/* Restaurant right content bottom section ends */
+
+/* Restaurant right content ends */
+
+/* Responsive section */

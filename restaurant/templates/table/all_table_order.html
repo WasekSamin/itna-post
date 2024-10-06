@@ -1,0 +1,65 @@
+{% extends "restaurant/base.html" %} {% load static %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/restaurant/closeReg.css' %}" />
+<link
+  rel="stylesheet"
+  href="{% static 'css/restaurant/openRestaurant.css' %}"
+/>
+
+<script src="{% static 'js/restaurant/tableOrderDetails.js' %}" defer></script>
+
+{% include "restaurant/sidebar.html" %}
+
+<div class="top___nav">
+    <div class="restaurant__hamburgerMenu">
+      <span class="iconify" data-icon="ci:menu-alt-05"></span>
+    </div>
+    <div class="open___reg">
+      <p class="text-white fs-5 fw-bold">All Table Orders</p>
+    </div>
+    <div>
+        <section class="restaurant__rightNavbar px-2 d-flex justify-content-end">
+            <div class="restaurant__productSearchField bg-white d-flex align-items-center">
+                <span class="iconify text-muted" data-icon="ant-design:search-outlined"></span>
+                <input class="w-100" type="search" placeholder="Search..." onkeyup="matchName(this)" />
+            </div>
+          </section>
+    </div>
+  </div>
+
+  <div class="main_____table______body table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+              <th scope="col">Customer Name</th>
+              <th scope="col">Customer Phone</th>
+              <th scope="col">Table</th>
+              <th scope="col">status</th>
+              
+              <th scope="col">Amount Received</th>
+              <th scope="col">Change</th>
+              <th scope="col">Total</th>
+              <th scope="col">Shop Name</th>
+            </tr>
+          </thead>
+          <tbody class="table__tableOrders">
+            {% if get_table_orders %}
+              {% for g in get_table_orders %}
+              <tr>
+                <td><a class="w-100 d-flex text-dark" href="{% url 'get_table_receipt' shopId.id g.id %}">{{ g.customer_name }}</a></td>
+                <td><a class="w-100 d-flex text-dark" href="{% url 'get_table_receipt' shopId.id g.id %}">{{ g.customer_phone }}</a></td>
+                <td><a class="w-100 d-flex text-dark" href="{% url 'get_table_receipt' shopId.id g.id %}">{{ g.table }}</a></td>
+                <td><a class="w-100 d-flex text-dark" href="{% url 'get_table_receipt' shopId.id g.id %}">{{ g.table_status }}</a></td>
+                <td><a class="w-100 d-flex text-dark" href="{% url 'get_table_receipt' shopId.id g.id %}">{{ shopId.currency.currency_icon }}{{ g.amount_received }}</a></td>
+                <td><a class="w-100 d-flex text-dark" href="{% url 'get_table_receipt' shopId.id g.id %}">{{ shopId.currency.currency_icon }}{{ g.change }}</a></td>
+                <td><a class="w-100 d-flex text-dark" href="{% url 'get_table_receipt' shopId.id g.id %}">{{ shopId.currency.currency_icon }}{{ g.grand_total }}</a></td>
+                <td><a class="w-100 d-flex text-dark" href="{% url 'get_table_receipt' shopId.id g.id %}">{{ g.shop.shop_name }}</a></td>
+              </tr>
+              {% endfor %}
+            {% else %}{% endif %}
+          </tbody>
+      </table>
+  </div>
+
+
+  {% endblock %}

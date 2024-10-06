@@ -1,0 +1,117 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+
+<!-- main new content start -->
+
+<!-- tab view start -->
+<div class="container tab______view">
+    {% for message in messages %}
+      <p class="fw-bold text-danger text-center">
+        {{ message }}
+      </p>
+    {% endfor %}
+
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="tab-content" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-General"
+          role="tabpanel"
+          aria-labelledby="pills-General-tab"
+        >
+          <div class="general_____part mt-5">
+
+              <div>
+                     <div class="row">
+                          <div class="col">
+                              <p>Full Name:<p>
+                            <input type="text" name="full_name" value="{{ empId.full_name }}" class="form-control" placeholder="Full Name" required>
+                          </div>
+                          <div class="col">
+                            <p>Set Username<p>
+                            <input type="text" name="emp_username" value="{{ empId.emp_username }}" class="form-control" placeholder="Username" required>
+                          </div>
+                        </div>
+                
+                              <div class="row">
+                                <div class="col">
+                                    <p>PIN:<p>
+                                  <input type="text" name="emp_pin" value="{{ empId.emp_pin }}" class="form-control" placeholder="PIN" required>
+                                </div>
+                                <div class="col">
+                                  <p>Confirm PIN:<p>
+                                  <input type="passwrod" name="c_pin" value="{{ empId.confirm_pin }}" class="form-control" placeholder="Confirm PIN" required>
+                                </div>
+                                <div class="col">
+                                  <label style="cursor: pointer" class="bg-primary border-1 px-2 py-2 rounded-3 text-white" for="upload_photo">Uploaded Photo:</label>
+                                  {% if empId.emp_profile_pic %}
+                                    <div class="mt-1">
+                                      <img src="{{ empId.emp_profile_pic.url }}" style="height: 5rem; width: 5rem;">
+                                    </div>
+                                  {% endif %}
+                                  <input type="file" name="emp_profile_pic" value="{{ empId.emp_profile_pic }}" class="form-control d-none" id="upload_photo" placeholder="Upload Image..">
+                                  
+                                </div>
+                              </div>
+                              <div class="mt-3">
+                                <p>Role:<p>
+                                <select class="form-select" aria-label="Default select example" name="role">
+                                  <option value="{{ empId.role.id }}" selected>{{ empId.role.role_title }}</option>
+                                  {% for role in roles %}
+                                    {% if role.id != empId.role.id %}
+                                      <option value="{{ role.id }}">{{ role.role_title }}</option>
+                                    {% endif %}
+                                  {% endfor %}
+                                  </select>
+                              </div>
+                              <div class="mt-3">
+                                <p>Select Status:<p>
+                                <select class="form-select" aria-label="Default select example" name="is_active">
+                                    <option value="ACTIVE" {% if empId.is_active == "ACTIVE" %}selected{% endif %}>ACTIVE</option>
+                                    <option value="BANN" {% if empId.is_active == "BANN" %}selected{% endif %}>BANN</option>
+                                  </select>
+                              </div>
+                              <div class="mt-3">
+                                <button type="submit" class="done____btn">Done</button>
+                              </div>
+                            </form>
+                   
+              </div>  
+
+
+          </div>
+        </div>
+  
+       
+  <!-- tab view end -->
+  
+  <!-- main new content end -->
+
+  <script>
+
+    // tab view 
+    // tab view id
+    const generalTab = document.getElementById("pills-General-tab")
+    const contactTab = document.getElementById("pills-Contact-tab")
+  
+    // tab container
+    const generalDiv = document.getElementById("pills-General")
+    const contactDiv = document.getElementById("pills-Contact")
+  
+  
+    function generalPart(){
+      generalTab.classList.remove("active")
+      generalDiv.classList.remove("active")
+      contactTab.classList.add("active")
+      contactDiv.classList.add("active", "show")
+    }
+
+
+  
+  
+  
+  </script>

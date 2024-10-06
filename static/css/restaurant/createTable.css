@@ -1,0 +1,44 @@
+.createTableMainSection {
+    height: 90vh;
+}
+
+.createTableBtn {
+  width: 100%;
+  height: 100%;
+  padding: 10px 25px;
+  border: 2px solid var(--dark-primary);
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  background: var(--dark-primary);
+  color: var(--white-primary);
+  z-index: 1;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.createTableBtn::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background: var(--background-primary);
+  transition: all 0.3s ease;
+}
+
+.createTableBtn:hover {
+  color: var(--dark-primary) !important;
+}
+
+.createTableBtn:hover::after {
+  left: 0;
+  width: 100%;
+}
+
+.createTableBtn:active {
+  top: 2px;
+}

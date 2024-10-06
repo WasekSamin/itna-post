@@ -1,0 +1,144 @@
+{% extends "restaurant/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/restaurant/orderDetails.css' %}" />
+
+<script src="{% static 'js/restaurant/orderDetails.js' %}" defer></script>
+
+<section id="restaurant__orderDetailContent">
+    {% comment %} Restaurant order details header section starts {% endcomment %}
+    <div id="restaurant__orderDetailsHeader" class="d-flex justify-content-between align-items-center px-3">
+        <section>
+            <a href="{% url 'get_table_orders' shopId.id %}" class="text-white">
+                <span class="iconify" data-icon="ic:baseline-arrow-back-ios-new"></span> Back
+            </a>
+        </section>
+        <section class="restaurant__allOrdersHeaderTitle">
+            <h5 class="text-white fw-bold">Order #{{ get_receipt.id }}</h5>
+        </section>
+
+        {% comment %}This is a hidden layer section starts{% endcomment %}
+        <section>
+        </section>
+        {% comment %}This is a hidden layer section ends{% endcomment %}
+    </div>
+    {% comment %} Restaurant order details header section ends {% endcomment %}
+
+    {% comment %}Restaurant order details left section starts{% endcomment %}
+    <div class="d-flex">
+        <div class="restaurant__orderDetailsLeftSection w-25 bg-white">
+            <section class="border-bottom border-1 py-3 border-muted px-3">
+                <div>
+                    <p class="text-muted">Store</p>
+                    <h5 class="fw-bold">{{ get_receipt.shop.shop_name }}</h5>
+                </div>
+                <div>
+                    <p class="text-muted">Order ID</p>
+                    <h5 class="fw-bold">#{{ get_receipt.id }}</h5>
+                </div>
+                <div>
+                    <p class="text-muted">Customer Name</p>
+                    <p class="fw-bold">{{ get_receipt.customer_name }}</p>
+                </div>
+                <div>
+                    <p class="text-muted">Customer Phone</p>
+                    <p class="fw-bold">{{ get_receipt.customer_phone }}</p>
+                </div>
+                <div>
+                    <p class="text-muted">Order Date</p>
+                    <p class="fw-bold">{{ get_receipt.created_at }}</p>
+                </div>
+            </section>
+
+            <section class="border-bottom border-1 py-3 border-muted px-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <section>
+                        <p class="text-muted">Payment Status</p>
+                        <p class="fw-bold">{{ get_receipt.table_status }}</p>
+                    </section>
+                    {% if get_receipt.table_status == "PAID" %}
+                        <section>
+                            <span class="iconify fs-5" data-icon="teenyicons:tick-circle-solid" style="color: #4ec274;"></span>
+                        </section>
+                        {% else %}
+                        <section>
+                            <span class="iconify fs-4 text-danger" data-icon="entypo:circle-with-cross" style="color: #4ec274;"></span>
+                        </section>
+                    {% endif %}
+                </div>
+                <div>
+                    <p class="text-muted">Payment Method</p>
+                    <p class="fw-bold">CASH</p>
+                </div>
+            </section>
+
+            <section class="border-bottom border-1 py-3 border-muted px-3">
+                <div>
+                    <section class="d-flex justify-content-between align-items-center">
+                        <p class="text-muted">Discount</p>
+                        <p class="fw-bold">{{ get_receipt.discount }}%</p>
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center border-top border-muted border-1 pt-3">
+                        <h5 class="fw-bold text-primary">Subtotal</h5>
+                        <h5 class="fw-bold">{{ shopId.currency.currency_icon }}{{ get_receipt.total }}</h5>
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center border-top border-muted border-1 pt-3">
+                        <h5 class="fw-bold text-primary">Vat</h5>
+                        <h5 class="fw-bold">{{ shopId.vat_amount }}%</h5>
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center border-top border-muted border-1 pt-3">
+                        <h5 class="fw-bold text-primary">Total</h5>
+                        <h5 class="fw-bold">{{ shopId.currency.currency_icon }}{{ get_receipt.grand_total }}</h5>
+                    </section>
+                </div>
+            </section>
+
+            <section class="restaurant__orderPrintBtn d-flex justify-content-center px-3 pt-3">
+                <a href="{% url 'printTableReceipt' shopId.id get_receipt.id %}" class="w-100">
+                    <button class="fw-bold">Print Receipt</button>
+                </a>
+            </section>
+        </div>
+        {% comment %}Restaurant order details left section ends{% endcomment %}
+
+        {% comment %}Restaurant order details right section starts{% endcomment %}
+        <div class="restaurant__orderDetaislRightSection w-100">
+            <section class="d-flex flex-column justify-content-between h-100">
+                <div>
+                    <section class="table-responsive h-100">
+                        <table class="table">
+                            <thead class="table-dark restaurant__orderDetailsTableHeader">
+                            <tr>
+                                <th scope="col" colspan="2">Product</th>
+                                <th scope="col">Transaction Type</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Discount</th>
+                                <th scope="col">Total Sales</th>
+                            </tr>
+                            </thead>
+                            <tbody class="restaurant__orderDetailsTableBody">
+                               {% for item in get_receipt.item_item.all %}
+                                <tr>
+                                    <td colspan="2">{{ item.items.item_name }}</td>
+                                    <td>CASH</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>{{ shopId.currency.currency_icon }}{{ item.items.item_price }}</td>
+                                    <td>{{ get_receipt.discount }}%</td>
+                                    <td>{{ shopId.currency.currency_icon }}{{ get_receipt.grand_total }}</td>
+                                </tr>
+                                
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </section>
+        </div>
+        {% comment %}Restaurant order details right section ends{% endcomment %}
+    </div>
+
+</section>
+{% endblock %}

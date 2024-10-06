@@ -1,0 +1,25 @@
+/* Lato font */
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    list-style: none !important;
+    text-decoration: none !important;
+    font-family: 'Lato', sans-serif;
+}
+
+:root {
+    --background-primary: #f5f5f5;
+    --blue-primary: #3a7cd8;
+    --blue-second-primary: #CAE8F4;
+    --dark-primary: #111;
+    --green-primary: #4EC274;
+    --dark-blue-primary: #434C55;
+    --white-primary: #fff;
+    --blue-third-primary: #bfdeff;
+    --green-primary: #198E6C;
+}
+
+body {
+    background-color: var(--background-primary);
+}

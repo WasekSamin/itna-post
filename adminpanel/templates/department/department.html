@@ -1,0 +1,119 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+<!-- search content start -->
+<div class="main____search________content">
+  <div class="search_____content me-1 mt-2">
+    <form>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="search here....."
+          aria-label=""
+          aria-describedby="basic-addon1"
+        />
+        <div class="input-group-prepend">
+          <button class="btn search_____btn" type="button">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="me-1 mt-2">
+    <button type="button" class="btn btn-Danger">Delete</button>
+    <!-- Example split danger button -->
+    <div class="btn-group">
+      <a href="{% url 'create-department' %}" type="button" class="btn new____dept text-white">
+        New Department
+      </a>
+      <button
+        type="button"
+        class="btn dropdown-toggle dropdown-toggle-split new____dept"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <span class="visually-hidden">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu new____dept">
+        <li><a class="dropdown-item text-white" href="{% url 'create-department-category' %}">New Category</a></li>
+        <li><a class="dropdown-item text-white" href="{% url 'create-item' %}">New Item</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- search content end -->
+
+<!-- department table start -->
+<div class="main____dept____table table-responsive">
+  <table class="table">
+    <thead class="table_____head">
+      <tr>
+        <th scope="col">
+          <div class="form-check">
+            <form>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="tabelCheck"
+              />
+            </form>
+          </div>
+        </th>
+        <th scope="col">Department</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <form>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="tabelCheck1"
+            />
+          </form>
+        </th>
+        <td><a href="{% url 'edit-department' %}" class="w-100 d-flex">Mark</a></td>
+        <td class="d-flex align-items-center">
+          <a href="{% url 'edit-department' %}" class="w-100 d-flex">Mark</a>
+          <form>
+            <p><span
+                class="iconify cross___icon"
+                data-icon="emojione:cross-mark"
+              ></span></p>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <form>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="tabelCheck2"
+            />
+          </form>
+        </th>
+        <td><a href="{% url 'edit-department' %}" class="w-100 d-flex">Mark2</a></td>
+        <td class="d-flex align-items-center">
+          <a href="{% url 'edit-department' %}" class="w-100 d-flex">Mark2</a>
+          <form>
+            <p>
+                <span
+                  class="iconify cross___icon"
+                  data-icon="emojione:cross-mark"
+                ></span>
+                </p>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- department table end -->

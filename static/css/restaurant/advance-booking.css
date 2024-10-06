@@ -1,0 +1,33 @@
+.main____left___content {
+  width: 40%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.main____left___content ul {
+  padding: 0;
+}
+.main____left___content ul li {
+  padding: 11px 40px;
+}
+.main____right___content {
+  width: 60%;
+}
+.main________content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.main____form {
+  padding: 0 80px;
+}
+
+.main____form input {
+  padding: 9px;
+  border-radius: 5px;
+}
+.main____left___content ul li {
+  background-color: var(--white-primary);
+  margin: 8px 12px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 5px;
+}

@@ -1,0 +1,113 @@
+{% extends "restaurant/base.html" %} 
+{% load static %} 
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/restaurant/closeReg.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/restaurant/openRestaurantLeftContent.css' %}" />
+<link rel="stylesheet" href="{% static 'css/restaurant/advance-booking.css' %}"/>
+
+<div class="top___nav">
+    <div class="ms-5">
+        <a class="text-white" href="{% url "open-restaurant" shopId.id %}">&#x2190; Back To POS</a>
+    </div>
+</div>
+
+
+{% comment %} main content {% endcomment %}
+<div class="main________content">
+
+    <div class="main____left___content">
+        <ul>
+            {% if advances %}
+                {% for a in advances %}
+                    <li><span class="fw-bold">Date:</span> {{ a.created_at }} <span class="fw-bold text-muted">|</span> &nbsp;<span class="fw-bold">Customer Name:</span> {{ a.customer_name }} <br> <span class="fw-bold">Number Of People:</span>{{ a.number_of_people }} <span class="text-muted fw-bold">|</span> &nbsp; <span class="fw-bold">Advanced Amount: </span>{{ shopId.currency.currency_icon }}{{ a.advance_amount }}</li>
+                {% endfor %}
+            {% else %}<ul class="fs-3 fw-bold ps-2">Its Empty!</ul>{% endif %}
+
+        </ul>
+    </div>
+
+    <div class="main____right___content">
+
+        <form class="main____form" action="" method="POST">
+            {% csrf_token %}
+
+  
+            <div>
+                <label for="customer_name" class="form-label fw-bold mt-2">Customer Name</label>
+                <input autofocus="true" name="customer_name" type="text" id="customer_name" class="d-block w-100 border border-1 border-muted" placeholder="Enter Customer Name..." required />
+            </div>
+            <div class="my-1">
+              <label for="customer_phone" class="form-label fw-bold mt-2">Customer Phone</label>
+              <input autofocus="true" name="customer_phone" type="number" id="customer_phone" class="d-block w-100 border border-1 border-muted" placeholder="Enter Customer Phone..." required />
+            </div>
+            <div class="my-1">
+                <label for="customer_email" class="form-label fw-bold mt-2">Customer Email</label>
+                <input autofocus="true" name="customer_email" type="email" id="customer_email" class="d-block w-100 border border-1 border-muted" placeholder="Enter Customer Email..." required />
+              </div>
+              <div class="my-1">
+                <label for="amount" class="form-label fw-bold mt-2">Advance Amount</label>
+                <input autofocus="true" name="advance_amount" type="number" id="advance_amount" class="d-block w-100 border border-1 border-muted" placeholder="Enter advance amount..." required />
+              </div>
+              <div class="mt-2">
+                <div class="form-floating">
+                    <textarea class="form-control" name="notes" placeholder="Leave a comment here" id="notes"></textarea>
+                    <label for="notes">Notes</label>
+                  </div>
+              </div>
+              <div class="my-1">
+                <label for="amount" class="form-label fw-bold mt-2">Number Of People</label>
+                <input autofocus="true" name="number_of_people" min="1" type="number" id="advance_amount" class="d-block w-100 border border-1 border-muted" placeholder="Enter number of people..." required />
+              </div>
+
+  
+              <div>
+                <label for="restaurant__paymentMethod" class="fw-bold my-1">Payment Method</label>
+                <div class="d-flex flex-column cash__paymentMethod">
+                  <section class="form-check">
+                    <div>
+                      <input class="form-check-input" type="radio" name="payment__method" id="cash" checked>
+                      <label class="form-check-label" for="cash">
+                        Cash
+                      </label>
+                    </div>
+                  </section>
+                  <section class="form-check">
+                    <input class="form-check-input" type="radio" name="payment__method" id="restaurant__creditCardPaymentInput">
+                    <label class="form-check-label" for="restaurant__creditCardPaymentInput">
+                      Credit Card
+                    </label>
+                    <div id="restaurant__creditCardField">
+                      <input name="credit_card_number" class="form-control" type="text" placeholder="Credit card account number..." />
+                    </div>
+                  </section>
+                  <section class="form-check">
+                    <input class="form-check-input" type="radio" name="payment__method" id="restaurant__bkashPaymentInput">
+                    <label class="form-check-label" for="restaurant__bkashPaymentInput">
+                      bKash
+                    </label>
+                    <div id="restaurant__bkashField">
+                      <input class="form-control" type="text" name="bkash_number" placeholder="bKash number..." />
+                    </div>
+                  </section>
+                  <section class="form-check">
+                    <input class="form-check-input" type="radio" name="payment__method" id="restaurant__nagadPaymentInput">
+                    <label class="form-check-label" for="restaurant__nagadPaymentInput">
+                      Nagad
+                    </label>
+                    <div id="restaurant__nagadfield">
+                      <input name="nagad_number" class="form-control" type="text" placeholder="Nagad number..." />
+                    </div>
+                  </section>
+                </div>
+              </div>
+  
+              <div class="mt-3">
+                  <button type="submit" class="restaurant__modalBtn text-white">Save</button>
+              </div>
+          </form>
+    </div>
+
+
+</div>
+{% endblock %}

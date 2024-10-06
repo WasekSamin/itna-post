@@ -1,0 +1,141 @@
+{% extends "restaurant/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/restaurant/orderDetails.css' %}" />
+
+<script src="{% static 'js/restaurant/orderDetails.js' %}" defer></script>
+
+<section id="restaurant__orderDetailContent">
+    {% comment %} Restaurant order details header section starts {% endcomment %}
+    <div id="restaurant__orderDetailsHeader" class="d-flex justify-content-between align-items-center px-3">
+        <section>
+            <a href="{% url 'restaurant-all-dues' shopId.id %}" class="text-white">
+                <span class="iconify" data-icon="ic:baseline-arrow-back-ios-new"></span> Back
+            </a>
+        </section>
+        <section class="restaurant__allOrdersHeaderTitle">
+            <h5 class="text-white fw-bold">Order #{{ order_details.id }}</h5>
+        </section>
+
+        {% comment %}This is a hidden layer section starts{% endcomment %}
+        <section>
+        </section>
+        {% comment %}This is a hidden layer section ends{% endcomment %}
+    </div>
+    {% comment %} Restaurant order details header section ends {% endcomment %}
+
+    {% comment %}Restaurant order details left section starts{% endcomment %}
+    <div class="d-flex">
+        <div class="restaurant__orderDetailsLeftSection w-25 bg-white">
+            <section class="border-bottom border-1 py-3 border-muted px-3">
+                <div>
+                    <p class="text-muted">Store</p>
+                    <h5 class="fw-bold">{{ shopId.shop_name }}</h5>
+                </div>
+                <div>
+                    <p class="text-muted">Order ID</p>
+                    <h5 class="fw-bold">#{{ order_details.id }}</h5>
+                </div>
+                <div>
+                    <p class="text-muted">Customer</p>
+                    <p class="fw-bold">{{ order_details.customer.customer_name }}</p>
+                </div>
+                <div>
+                    <p class="text-muted">Order Date</p>
+                    <p class="fw-bold">{{ order_details.created_at }}</p>
+                </div>
+                <div>
+                    <p class="text-muted">Submission Date</p>
+                    <p class="fw-bold">{{ order_details.submission_date }}</p>
+                </div>
+            </section>
+
+            <section class="border-bottom border-1 py-3 border-muted px-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <section>
+                        <p class="text-muted">Payment Status</p>
+                        {% comment %} <p class="fw-bold">{% if order_details.due_clear %}Clear{% else %}Not Clear{% endif %}</p> {% endcomment %}
+                        <form method="POST" action="{% url 'update-due-status' shopId.id order_details.id %}">{% csrf_token %}
+                            <select name="payment_status" class="form-select my-1">
+                                <option value="clear" {% if order_details.due_clear == True %}selected{% endif %}>Clear</option>
+                                <option value="not_clear" {% if order_details.due_clear == False %}selected{% endif %}>Not Clear</option>
+                            </select>
+
+                            <button type="submit" id="payment__updateBtn">
+                                <span class="iconify" data-icon="grommet-icons:update"></span>
+                            </button>
+                        </form>
+                    </section>
+                    {% if order_details.due_clear %}
+                        <section>
+                            <span class="iconify fs-5" data-icon="teenyicons:tick-circle-solid" style="color: #4ec274;"></span>
+                        </section>
+                        {% else %}
+                        <section>
+                            <span class="iconify fs-4 text-danger" data-icon="entypo:circle-with-cross" style="color: #4ec274;"></span>
+                        </section>
+                    {% endif %}
+                </div>
+            </section>
+
+            <section class="border-bottom border-1 py-3 border-muted px-3">
+                <div>
+                    <section class="d-flex justify-content-between align-items-center">
+                        <p class="text-muted">Subtotal</p>
+                        <p class="fw-bold">{{ shopId.currency.currency_icon }}{{ order_details.due_total }}</p>
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center">
+                        <p class="text-muted">Vat</p>
+                        <p class="fw-bold">{{ shopId.vat_amount }}%</p>
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center border-top border-muted border-1 pt-3">
+                        <h5 class="fw-bold text-primary">Total</h5>
+                        <h5 class="fw-bold">{{ shopId.currency.currency_icon }}{{ order_details.due_grand_total }}</h5>
+                    </section>
+                </div>
+            </section>
+
+            <section class="restaurant__orderPrintBtn d-flex justify-content-center px-3 pt-3">
+                <a href="{% url 'restaurant-due-receipt' shopId.id order_details.id %}" class="w-100">
+                    <button class="fw-bold">Print Receipt</button>
+                </a>
+            </section>
+        </div>
+        {% comment %}Restaurant order details left section ends{% endcomment %}
+
+        {% comment %}Restaurant order details right section starts{% endcomment %}
+        <div class="restaurant__orderDetaislRightSection w-100">
+            <section class="d-flex flex-column justify-content-between h-100">
+                <div>
+                    <section class="table-responsive h-100">
+                        <table class="table">
+                            <thead class="table-dark restaurant__orderDetailsTableHeader">
+                            <tr>
+                                <th scope="col" colspan="2">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col" colspan="2">Order Note</th>
+                            </tr>
+                            </thead>
+                            <tbody class="restaurant__orderDetailsTableBody">
+                                {% for order in order_details.items.all %}
+                                <tr>
+                                    <td colspan="2">{{ order.item.item_name }}</td>
+                                    <td>{{ order.quantity }}</td>
+                                    <td>{{ shopId.currency.currency_icon }}{{order.item.item_price }}</td>
+                                    <td colspan="2" style="max-width: 2rem; word-break: break-all;" class="text-muted">{{ order_details.order_note }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </section>
+        </div>
+        {% comment %}Restaurant order details right section ends{% endcomment %}
+    </div>
+
+</section>
+{% endblock %}

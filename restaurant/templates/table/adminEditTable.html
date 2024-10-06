@@ -1,0 +1,60 @@
+{% extends "restaurant/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/restaurant/createTable.css' %}" />
+
+{% comment %} Navbar section starts {% endcomment %}
+<section class="bg-primary p-2 d-flex align-items-center">
+    <a class="text-white d-flex align-items-center" href="{% url 'admin-all-tables' shop_id.id %}"><span class="iconify" data-icon="ant-design:left-outlined"></span> Go Back</a>
+</section>
+{% comment %} Navbar section ends {% endcomment %}
+
+{% comment %} Create table section starts {% endcomment %}
+<section class="createTableMainSection d-flex flex-column justify-content-center align-items-center">
+    {% comment %} Message section starts {% endcomment %}
+    {% for message in messages %}
+        <section>
+            <p class="text-danger fw-bold">{{ message }}</p>
+        </section>
+    {% endfor %}
+    {% comment %} Message section ends {% endcomment %}
+    <div class="card w-50 p-3">
+        <h5 class="fw-bold text-center">Edit Table - <span class="text-primary">{{ table_obj.table_name }}</span></h5>
+        <form method="POST" action="{% url 'admin-edit-table' shop_id.id table_obj.id %}">{% csrf_token %}
+            <section>
+                <label class="form-label fw-bold" for="table_name">Table Name</label>
+                <input autofocus="true" value="{{ table_obj.table_name }}" class="form-control" id="table_name" name="table_name" placeholder="Table name..." />
+            </section>
+            <section class="my-2">
+                <label class="form-label fw-bold" for="chair_number">No. of Chairs</label>
+                <input class="form-control" value="{{ table_obj.number_of_chairs }}" id="chair_number" name="chair_number" placeholder="No. of chairs..." />
+            </section>
+            <section class="mb-2">
+                <label class="form-label fw-bold" for="is_active">Is Active</label>
+                <select class="form-select" name="is_active" id="is_active">
+                    <option value="yes" {% if table_obj.is_active %}selected{% endif %}>Yes</option>
+                    <option value="no" {% if not table_obj.is_active %}selected{% endif %}>No</option>
+                </select>
+            </section>
+            <section>
+                <label class="form-label fw-bold" for="waiter">Select Waiter</label>
+                {% if waiters|length > 0 %}
+                    <select class="form-select" id="waiter" name="waiter">
+                    {% for waiter in waiters %}
+                        <option value="{{ waiter.id }}" {% if waiter.id == table_obj.waiter.id %}selected{% endif %}>{{ waiter.emp_username }}</option>
+                    {% endfor %}
+                    </select>
+                {% endif %}
+            </section>
+
+            <section class="mt-2">
+                <button type="submit" class="createTableBtn">Update</button>
+            </section>
+        </form>
+    </div>
+</section>
+{% comment %} Create table section starts {% endcomment %}
+{% endblock %}

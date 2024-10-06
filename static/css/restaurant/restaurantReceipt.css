@@ -1,0 +1,147 @@
+:root{
+  --font-size: 15px;
+}
+.main____details > div{
+  border-bottom: 1px dashed #000;
+}
+.main____________________details{
+  border-bottom: 1px dotted #000;
+}
+.inner___nw{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nw____nw{
+  display: flex;
+  justify-content: space-between;
+}
+.inner___nw p{
+  margin-block-end: 0;
+  margin-block-start: 0;
+
+}
+.inner___nw p:last-child{
+  margin-left: .5rem;
+}
+.asdgad{
+  font-size: 8px !important;
+}
+.main___font{
+  font-size: var(--font-size);
+}
+.details____info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main____details p{
+  margin-block-end: 0;
+  margin-block-start: 0;
+}
+.main____details{
+  width: 330px;
+}
+.inner_____div p {
+  margin-block-end: 0;
+  margin-block-start: 0;
+}
+.inner_____div {
+  width: 35%;
+  border-radius: 6px;
+  background-color: var(--white-primary);
+}
+
+.main____inner___div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.main___table__div {
+  background-color: var(--white-primary);
+  border-radius: 6px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.invoice___name {
+  border-radius: 6px;
+  width: 70%;
+  margin: 0 auto;
+  background-color: var(--white-primary);
+}
+
+.restaurant__printBtn {
+  width: 15rem;
+  height: 100%;
+  padding: 10px 25px;
+  border: 2px solid var(--dark-primary);
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  background: var(--dark-primary);
+  color: var(--white-primary);
+  z-index: 1;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.restaurant__printBtn::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background: var(--background-primary);
+  transition: all 0.3s ease;
+}
+
+.restaurant__printBtn:hover {
+  color: var(--dark-primary) !important;
+}
+
+.restaurant__printBtn:hover::after {
+  left: 0;
+  width: 100%;
+}
+
+.restaurant__printBtn:active {
+  top: 2px;
+}
+
+@media print {
+
+  #hideLink,
+  .restaurant__printBtn {
+    display: none !important;
+  }
+
+  /* body {
+    width: 100%;
+    padding: 0 10rem;
+  } */
+}
+
+@media (max-width: 1000px) {
+  .inner_____div {
+    width: 45%;
+  }
+
+  .invoice___name {
+    width: 100%;
+  }
+
+  .main___table__div {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .inner_____div {
+    width: 100%;
+  }
+}

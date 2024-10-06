@@ -1,0 +1,17 @@
+{% extends "restaurant/base.html" %} {% load static %} {% block content %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/restaurant/start____selling.css' %}"
+/>
+<div class="container">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="main_____container">
+      <label class="fw-bold">Start Selling</label>
+      <input class="mt-2" type="text" name="opening_text" />
+      <button class="mt-2" type="submit">Start Selling</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

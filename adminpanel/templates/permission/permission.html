@@ -1,0 +1,49 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+
+
+
+
+
+
+
+<div class="permisson____btn">
+<a class="per_____btn" href="{% url 'createPermissionView' shop_id.id %}">Add Permission</a>
+</div>
+
+
+{% comment %} permission table start {% endcomment %}
+<div class="main____dept____table table-responsive">
+    <table class="table">
+      <thead class="table_____head">
+        <tr>
+          <th scope="col">Role</th>
+        </tr>
+      </thead>
+      <tbody class="catgory__table">
+{% if permissions %}
+    {% for pp in permissions %}
+    <tr>
+        <td class="category__data d-flex"><a href="{% url 'editPermissionView' pp.id shop_id.id %}" class="w-100 d-flex text-dark category__name">
+            {{ pp.permission_title }}
+        </a>  
+        <form method="POST" action="{% url 'deletePermission' pp.id shop_id.id %}">
+          {% csrf_token %}
+          <button class="border-0 bg-white" type="submit"><span
+              class="iconify cross___icon"
+              data-icon="emojione:cross-mark"
+            ></span></button>
+        </form></td>
+      </tr>
+
+        
+    {% endfor %}
+{% else %}NO PERMISSION ADDED{% endif %}
+</tbody>
+</table>
+</div>
+
+{% comment %} permission table end {% endcomment %}

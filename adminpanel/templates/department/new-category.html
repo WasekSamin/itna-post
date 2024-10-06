@@ -1,0 +1,64 @@
+{% load static %} {% include 'adminpanel/sidebar.html' %}
+<link rel="stylesheet" href="{% static 'css/admin-panel/admin-panel.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/orders.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin-panel/department.css' %}" />
+
+<div class="container mt-4">
+  <div class="general_____part">
+    <div class="two____product">
+      <div class="input-group product____input mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Category Name"
+          aria-label="Example text with button addon"
+          aria-describedby="button-addon1"
+          required
+        />
+      </div>
+      <div class="input-group product____input mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Category Short Name"
+          aria-label="Example text with button addon"
+          aria-describedby="button-addon1"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-floating product____input mb-3">
+      <textarea
+        class="form-control"
+        placeholder="Description"
+        id="floatingTextarea2"
+        style="height: 100px"
+      ></textarea>
+      <label for="floatingTextarea2">Category Descriptions</label>
+    </div>
+    <div class="mt-4">
+        <label>Department: </label>
+        <select class="form-select mt-2" aria-label="Default select example">
+          <option selected>Select Department</option>
+          <option value="1">Inventory</option>
+        </select>
+      </div>
+ 
+
+    <div class="form-check mt-3">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id="activeNewItem"
+        checked
+      />
+      <label class="form-check-label" for="flexCheckChecked"> is ACTIVE </label>
+    </div>
+
+    <div class="mt-3">
+      <button type="button" class="done____btn">Done</button>
+      <button type="button" class="done____btn">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/restaurant/sidebar.css' %}" />
+
+<script src="{% static 'js/restaurant/sidebar.js' %}" defer></script>
+
+<div class="restaurant__overlay w-100 h-100"></div>
+
+<div id="restaurant__sidebar">
+    {% comment %} Restaurant sidebar top section starts {% endcomment %}
+    <section class="d-flex align-items-center p-3 restaurant__sidebarTopSection bg-primary">
+        <div class="me-2 close__restaurant__sidebar">
+            <span class="iconify text-white" data-icon="ant-design:left-outlined"></span>
+        </div>
+        <h5 class="fw-bold text-white">{{ shopId }}</h5>
+    </section>
+    {% comment %} Restaurant sidebar top section ends {% endcomment %}
+
+    {% comment %} Restaurant sidebar bottom section starts {% endcomment %}
+    <section class="restaurant__sidebarBottomSection">
+        <div class="py-2 border-bottom border-muted">
+            <p class="px-3 text-white"><span class="fw-bold">Account ID: </span>{{ request.user.id }}, ShopID: {{ shopId.id }}</p>
+        </div>
+
+        <div class="py-2 border-bottom border-muted">
+            <a href="{% url "open-restaurant" shopId.id %}">
+                <p class="text-white px-3 fs-5 fw-bold d-flex align-items-center">
+                    <span class="iconify me-2" data-icon="clarity:shopping-cart-solid"></span> POS
+                </p>
+            </a>
+        </div>
+
+        <div class="py-2 border-bottom border-muted">
+            <a href="{% url 'restaurant-all-payments' shopId.id %}">
+                <p class="text-white px-3 fs-5 fw-bold d-flex align-items-center">
+                    <span class="iconify me-2" data-icon="fluent:box-16-filled"></span> Orders
+                </p>
+            </a>
+        </div>
+
+        {% comment %} <div class="py-2 border-bottom border-muted">
+            <a href="#">
+                <p class="text-white px-3 fs-5 fw-bold d-flex align-items-center">
+                    <span class="iconify me-2" data-icon="clarity:shopping-cart-solid"></span> Manual Refund
+                </p>
+            </a>
+        </div> {% endcomment %}
+
+        <div class="py-2 border-bottom border-muted">
+            <a href="{% url "get_table_page" shopId.id %}">
+                <p class="text-white px-3 fs-5 fw-bold d-flex align-items-center">
+                    <span class="iconify me-2" data-icon="ant-design:table-outlined"></span> Available Tables
+                </p>
+            </a>
+        </div>
+
+        {% comment %} <div class="py-2 border-bottom border-muted">
+            <a href="{% url 'close-register' shopId.id %}">
+                <p class="text-white px-3 fs-5 fw-bold d-flex align-items-center">
+                    <span class="iconify me-2" data-icon="ant-design:close-outlined"></span> Close Register
+                </p>
+            </a>
+        </div> {% endcomment %}
+
+        {% comment %} <div class="py-2 border-bottom border-muted">
+            <a href="#">
+                <p class="text-white px-3 fs-5 fw-bold d-flex align-items-center">
+                    <span class="iconify me-2" data-icon="fluent:payment-16-filled"></span> Paying/Payouts
+                </p>
+            </a>
+        </div> {% endcomment %}
+
+        {% comment %} <div class="py-2 border-bottom border-muted">
+            <a href="#">
+                <p class="text-white px-3 fs-5 fw-bold d-flex align-items-center">
+                    <span class="iconify me-2" data-icon="ic:baseline-tips-and-updates"></span> Tips
+                </p>
+            </a>
+        </div> {% endcomment %}
+
+        {% comment %} <div class="py-2 border-bottom border-muted">
+            <a href="#">
+                <p class="text-white px-3 fs-5 fw-bold d-flex align-items-center">
+                    <span class="iconify me-2" data-icon="ci:settings-filled"></span> Settings
+                </p>
+            </a>
+        </div> {% endcomment %}
+
+        {% comment %} <div class="py-2 border-bottom border-muted">
+            <a href="#">
+                <p class="text-white px-3 fs-5 fw-bold d-flex align-items-center">
+                    <span class="iconify me-2" data-icon="si-glyph:arrow-reload"></span> Synchronize
+                </p>
+            </a>
+        </div> {% endcomment %}
+
+        <div class="py-2 border-bottom border-muted accordion" id="accordionExample">
+            <div class="accordion-item inner___accordion">
+            <a href="#" class="accordion-header" id="headingOne">
+                {% comment %} {% url "admin-home" shopId.id %} {% endcomment %}
+                <p class="text-white fs-5 fw-bold d-flex align-items-center accordion-button accor____btn" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <span class="iconify me-2" data-icon="bx:bxs-dashboard"></span> Close Register
+                </p>
+            </a>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <form action="{% url "close_selling" shopId.id  %}" method="POST">
+                          {% csrf_token %}
+                        <label for="amountSoldToday" class="form-label text-white">Amount Sold Today:</label>
+                        <input type="number" name="total_sold" id="amountSoldToday" class="form-control" aria-describedby="passwordHelpBlock">
+                        <div class="d-flex justify-content-center mt-2">
+                            <button type="submit" class="session____submit___btn">Close Register</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+         </div>
+        </div>
+
+        <div class="py-2 border-bottom border-muted">
+            <a href="{% url 'contact' shopId.id %}">
+                <p class="text-white px-3 fs-5 fw-bold d-flex align-items-center">
+                    <span class="iconify me-2" data-icon="bi:question-diamond-fill"></span> Help
+                </p>
+            </a>
+        </div>
+
+       
+    </section>
+    {% comment %} Restaurant sidebar bottom section ends {% endcomment %}
+</div>

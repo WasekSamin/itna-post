@@ -1,0 +1,120 @@
+{% extends "landing/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/saas/packageDetail.css' %}">
+
+<script src="{% static 'js/saas/packageDetail.js' %}" defer></script>
+
+<div class="container my-4">
+    <a class="text-dark" href="{% url 'landing' %}">&#x2190; Back To Home</a>
+</div>
+
+<div class="w-100">
+    {% for message in messages %}
+        <p class="text-danger fw-bold w-50 mx-auto">
+            {{ message }}
+        </p>
+    {% endfor %}
+</div>
+
+<div class="container d-flex justify-content-center my-2 mb-5">
+    <section class="card p-3 w-50">
+        <div class="border-bottom border-muted border-2">
+            <h4 class="fw-bold text-center">{{ package_obj.package_name }}</h4>
+            <h5><span class="fw-bold text-primary">Price:</span> ${{ package_obj.package_price }}</h5>
+            <p class="text-muted">{{ package_obj.package_description }}</p>
+        </div>
+
+        <div class="my-3">
+            <form enctype="multipart/form-data" method="POST" action="{% url 'package-checkout' package_obj.id %}">{% csrf_token %}
+                <section class="border-bottom border-2 border-muted pb-2">
+                    <h5 class="fw-bold text-center">Customer Details</h5>
+                    <div>
+                        <label class="form-label fw-bold" for="cust_name">Customer Name</label>
+                        <input type="text" autofocus="true" id="cust_name" name="cust_name" class="form-control" placeholder="Enter customer name..." required />
+                    </div>
+                    <div>
+                        <label class="form-label fw-bold" for="cust_email">Customer Email</label>
+                        <input type="email" autofocus="true" id="cust_email" name="cust_email" class="form-control" placeholder="Enter customer name..." required />
+                    </div>
+                    <div class="my-1">
+                        <label class="form-label fw-bold" for="cust_contact">Customer Phone No.</label>
+                        <input type="tel" id="cust_contact" name="cust_contact" class="form-control" placeholder="Enter customer phone no..." required />
+                    </div>
+                </section>
+
+                <section class="my-1 border-bottom border-2 border-muted mb-2">
+                    <h5 class="fw-bold text-center">Shop Details</h5>
+                    <div>
+                        <label class="form-label fw-bold" for="shop_name">Shop Name</label>
+                        <input id="shop_name" name="shop_name" class="form-control" placeholder="Enter Shop name..." required />
+                    </div>
+                    <div class="my-1 d-flex justify-content-between my-2 mt-3">
+                        <div class="d-flex flex-column">
+                            <small class="fw-bold">Give your shop logo</small>
+                            <label id="shop__logoLabel" class="form-label p-2 d-flex justify-content-center align-items-center" for="shop_logo">Shop Logo</label>
+                            <input onchange="getShopLogo(this)" type="file" accept="image/*" id="shop_logo" name="shop_logo" class="form-control d-none" required />
+                        </div>
+                        <img src="" style="width: 6rem; height: 6rem; display: none;" id="shop__logoImg" alt="" />
+                    </div>
+                </section>
+
+                <section class="my-1 border-bottom border-2 border-muted mb-2">
+                    <h5 class="fw-bold text-center">Payment Details</h5>
+                    
+                    <div class="form-check my-2">
+                        <input class="form-check-input" type="radio" name="payment_check" id="bkash_check" checked>
+                        <label class="form-check-label" for="bkash_check">
+                          bKash
+                        </label>
+
+                        <section class="bkash__section">
+                            <small class="text-muted">Please complete your bkash payment!</small>
+                            <p>bKash personal number: <span class="fw-bold">016342343434</span></p>
+                            <div>
+                                <section class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">bKash Number</small>
+                                    <input type="tel" class="form-control w-50" name="user_bkash_number" placeholder="Enter bKash number..." />
+                                </section>
+                                <section class="d-flex my-2 justify-content-between align-items-center">
+                                    <small class="text-muted">bKash Transaction ID</small>
+                                    <input type="text" class="form-control w-50" name="user_bkash_trans_id" placeholder="bKash transaction id..." />
+                                </section>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="payment_check" id="nagad_check">
+                        <label class="form-check-label" for="nagad_check">
+                            Nagad
+                        </label>
+
+                        <section class="nagad__section">
+                            <small class="text-muted">Please complete your Nagad payment!</small>
+                            <p>Nagad personal number: <span class="fw-bold">016342343434</span></p>
+                            <div>
+                                <section class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Nagad Number</small>
+                                    <input type="tel" class="form-control w-50" name="user_nagad_number" placeholder="Enter nagad number..." />
+                                </section>
+                                <section class="d-flex justify-content-between align-items-center my-2">
+                                    <small class="text-muted">Nagad Transaction ID</small>
+                                    <input type="text" class="form-control w-50" name="user_nagad_trans_id" placeholder="nagad transaction id..." />
+                                </section>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <section class="mt-3">
+                    <button type="submit" class="text-uppercase package__buyBtn">Buy</button>
+                </section>
+            </form>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

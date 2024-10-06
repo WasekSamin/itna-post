@@ -1,0 +1,26 @@
+{% include 'exceptions/base.html' %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/admin-panel/success.css' %}">
+
+<div class="main-card-body">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body main-body">
+                        <h4 class="fw-bold text-center Unsuccessful">Payment Unsuccessful!</h4>
+                        <div class="succes-icon d-flex justify-content-center">
+                            <i class="far fa-times-circle failed-icon"></i>
+                        </div><br>
+                        <p class="fw-bold text-center">Invalid Credentials</p>
+                        <div class="submit-button d-flex justify-content-center">
+                            <a class="print-btn text-white text-center" href="#">Return</a>
+                            <a class="home-btn text-white text-center" href="#">Go Home</a>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+   </div>

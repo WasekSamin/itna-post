@@ -1,0 +1,65 @@
+{% load static %}
+{% include 'account/base.html' %}
+
+<div class="reg_____main">
+  {% for message in messages %}
+    <p class="fw-bold text-center text-danger pt-2">
+      {{ message }}
+    </p>
+  {% endfor %}
+    <p class="sign" align="center">Sign Up</p>
+    <form style="padding-bottom: 17px;" class="form2" action="" method="POST">
+      {% csrf_token %}
+      <input autofocus="true" class="un" name="username" type="text" align="center" placeholder="Username" required/>
+      <input class="un" name="email" type="email" align="center" placeholder="Email" required />
+      <input
+        class="pass"
+        name="password"
+        type="password"
+        align="center"
+        placeholder="Password" required
+      />
+      {% if message %}
+      <p>{{ message }}</p>
+      {% else %}{% endif %}
+      <button type="submit" class="submit" align="center">Sign Up</button>
+    </form>
+
+    <section class="text-center pb-3">
+      <small class="text-muted">
+        Already have an account! <a href="{% url 'login' %}" class="text-primary text-decoration-underline">Sign In</a>
+      </small>
+    </section>
+  </div>
+
+  <script>
+    const forfile = () => {
+      const FileName = document.querySelector("#formFileLg").value;
+
+      let docFileMain = FileName.split("\\");
+      docFileMain = docFileMain[docFileMain.length - 1];
+      document.querySelector("#for-doc-file-name").innerText = docFileMain;
+    };
+
+    function forupload(e) {
+      let fileVal = e.files[0].name;
+
+      document.querySelector("#for-upload-name").innerText = fileVal;
+      document.querySelector("#for-upload-name").style.display = "block";
+      document.querySelector("#for-upload-name").style.background = "#19361a";
+
+      if (fileVal) {
+        var elem = document.getElementById("for-upload-name");
+        var width = 1;
+        var id = setInterval(frame, 10);
+        function frame() {
+          if (width >= 74) {
+            clearInterval(id);
+          } else {
+            width++;
+            elem.style.width = width + "%";
+          }
+        }
+      }
+    }
+  </script>

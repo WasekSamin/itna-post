@@ -1,0 +1,164 @@
+{% load static %} {% include 'adminpanel/base.html' %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/admin-panel/shop-settings.css' %}"
+/>
+
+<div class="go___back ms-4 mt-3">
+  <p>
+    <a class="text-dark ms-2" href="{% url 'admin-home' shop_id.id %}"
+      ><span class="iconify" data-icon="akar-icons:arrow-back"></span> Go
+      Back</a
+    >
+  </p>
+</div>
+<div class="container main___shop____setting my-5">
+  <p class="fs-3 fw-bold text-center">Shop Info</p>
+  {% for message in messages %}
+    <p class="text-danger fw-bold text-center">
+      {{ message }}
+    <p>
+  {% endfor %}
+  <form enctype="multipart/form-data" method="POST" action="{% url 'update-shop' shop_id.id %}">{% csrf_token %}
+    <div class="mb-3">
+      <label for="cust_name" class="form-label">Customer Name:</label>
+      <input
+        name="cust_name"
+        type="text"
+        class="form-control"
+        placeholder="Type your name.."
+        id="cust_name"
+        value="{{ package_obj.customer_name }}"
+        required
+        aria-describedby="name"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="cust_phone" class="form-label">Customer Phone:</label>
+      <input
+        name="cust_phone"
+        type="number"
+        class="form-control"
+        placeholder="Type your phone.."
+        id="cust_phone"
+        value="{{ package_obj.customer_phone_number }}"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="shop_name" class="form-label">Shop Name:</label>
+      <input
+        name="shop_name"
+        type="text"
+        class="form-control"
+        placeholder="Type your shop name.."
+        id="shop_name"
+        aria-describedby="shop"
+        value="{{ shop_id.shop_name }}"
+        required
+      />
+    </div>
+    <div class="form-floating mb-3">
+      <textarea
+        name="add1"
+        class="form-control"
+        placeholder="Type shop address"
+        id="address1"
+        required
+      >{{ shop_id.shop_address1 }}</textarea>
+      <label for="address1">Shop Address 1</label>
+    </div>
+    <div class="form-floating mb-3">
+      <textarea
+        name="add2"
+        class="form-control"
+        placeholder="Type another shop address"
+        id="address2"
+      >{{ shop_id.shop_address2 }}</textarea>
+      <label for="address2" class="text-muted">Shop Address 2 (Optional)</label>
+    </div>
+    <div class="mb-3">
+      <label for="shop_phone" class="form-label">Shop Cotact No:</label>
+      <input
+        name="shop_contact"
+        type="number"
+        class="form-control"
+        placeholder="Type your phone.."
+        id="shop_phone"
+        value="{{ shop_id.shop_contact }}"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="vat" class="form-label">Shop Vat ID:</label>
+      <input
+        name="shop_vat_id"
+        type="text"
+        class="form-control"
+        placeholder="type your shop vat.."
+        id="vat"
+        value="{{ shop_id.shop_vat }}"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="bin" class="form-label">Shop Bin No:</label>
+      <input
+        name="shop_bin_no"
+        type="text"
+        class="form-control"
+        placeholder="type your shop vat.."
+        id="bin"
+        value="{{ shop_id.shop_bin_no }}"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="vatamount" class="form-label">Shop Vat Amount:</label>
+      <div class="d-flex align-items-center">
+      <input
+        name="vat_amount"
+        type="number"
+        class="form-control"
+        placeholder="Type your shop vat amount.."
+        id="vatamount"
+        value="{{ shop_id.vat_amount }}"
+        required
+      />
+      <span class="ms-1 fw-bold text-muted">%</span>
+      </div>
+    </div>
+    <div class="mb-3 form-check">
+      <input name="mushak_check" {% if shop_id.show_mushak %}checked{% endif %} type="checkbox" value="yes" class="form-check-input mushak__check" id="mushak" />
+      <label class="form-check-label" for="mushak">Mushak</label>
+      <div class="mt-1 mushak__input">
+        <input class="form-control" type="number" placeholder="Type mushak no..." name="mushak_no" value="{{ shop_id.mushak_no }}" />
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <label class="uploadLabel" for="myfilesetting">Shop Logo</label>
+      <input name="shop_logo" class="fileInput" type="file" id="myfilesetting" name="photoUpload" onchange="forupload(this)" accept="image/*"/>
+    </div>
+    {% if shop_id.shop_logo %}
+    <div class="mb-2">
+      <img id="product__img" style="width: 5rem; height: 5rem; object-fit: cover" src="{{ shop_id.shop_logo.url }}" alt="" />
+    </div>
+    {% endif %}
+    <button type="submit" class="my-2 shop_settingsBtn">UPDATE</button>
+  </form>
+</div>
+
+<script>
+  const image = document.getElementById("product__img")
+
+  function forupload(e) {
+    let fileVal = e.files[0];
+
+    if (fileVal) {
+      document.querySelector("#product__img").src = URL.createObjectURL(fileVal);
+      image.style.display = "block"
+    }
+  }
+
+  </script>

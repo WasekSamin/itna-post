@@ -1,0 +1,20 @@
+.main_____container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.main_____container input{
+    width: 60%;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+}
+.main_____container button{
+    padding: 6px 27px;
+    border-radius: 5px;
+    background-color: var(--blue-primary);
+    border: none;
+    color: var(--white-primary);
+}
